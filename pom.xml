@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.nvnieuwk</groupId>
+	<artifactId>nft-bam</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
+	<name>nft-bam</name>
+	<description>nf-test plugin to support SAM/BAM/CRAM formats</description>
+	<url>https://github.com/nvnieuwk/nft-bam</url>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/nvnieuwk/nft-bam/tree/master</url>
+		<connection>scm:git:https://github.com/nvnieuwk/nft-bam</connection>
+		<developerConnection>scm:git:ssh://github.com:nvnieuwk/nft-bam.git</developerConnection>
+	</scm>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<maven.compiler.release>8</maven.compiler.release>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<junit.version>5.9.1</junit.version>
+		<additionalparam>-Xdoclint:none</additionalparam>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>

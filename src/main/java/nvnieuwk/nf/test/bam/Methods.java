@@ -1,4 +1,4 @@
-package com.nvnieuwk.nf.test.bam;
+package nvnieuwk.nf.test.bam;
 
 public class Methods {
 

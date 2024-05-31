@@ -1,0 +1,23 @@
+nextflow_process {
+
+    name "Test Process COPY_BAM"
+    script "./main.nf"
+    process "COPY_BAM"
+
+    test("Should run without failures") {
+
+        when {
+            process {
+                """
+                input[0] = file("tests/test.paired_end.bam")
+                """
+            }
+        }
+
+        then {
+            helloBam()
+        }
+
+    }
+
+}
