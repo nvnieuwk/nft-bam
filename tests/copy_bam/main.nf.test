@@ -4,34 +4,42 @@ nextflow_process {
     script "./main.nf"
     process "COPY_BAM"
 
-    test("bam header") {
+    test("header") {
 
         when {
             process {
                 """
-                input[0] = file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true)
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                )
                 """
             }
         }
 
         then {
-            assert snapshot(path(process.out.bam.get(0)).getBamHeader()).match("header")
+            assert snapshot(process.out.bam.collect { bam(it).getBamHeader() }).match("header")
         }
 
     }
 
-    test("bam reads") {
+    test("raw reads") {
 
         when {
             process {
                 """
-                input[0] = file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true)
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                )
                 """
             }
         }
 
         then {
-            assert snapshot(path(process.out.bam.get(0)).getBamReads()).match("reads")
+            assert snapshot(process.out.bam.collect { bam(it).getBamReads() }).match("raw reads")
         }
 
     }

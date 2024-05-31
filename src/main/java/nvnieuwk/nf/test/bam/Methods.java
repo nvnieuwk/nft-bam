@@ -1,9 +1,11 @@
 package nvnieuwk.nf.test.bam;
 
+import java.nio.file.Path;
+
 public class Methods {
 
-	public static void helloBam() {
-		System.out.println("Hello BAM");
+	public static AlignmentFile bam(String bamFile) {
+		return new AlignmentFile(path(bamFile))
 	}
 	
 }
