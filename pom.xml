@@ -43,6 +43,12 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+        <dependency>
+			<groupId>com.github.samtools</groupId>
+			<artifactId>htsjdk</artifactId>
+			<version>4.1.0</version>
+		</dependency>
 	</dependencies>
 
 </project>
