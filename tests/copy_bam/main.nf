@@ -3,7 +3,7 @@ process COPY_BAM {
     path(bam)
 
     output:
-    path(copy)
+    path("*.{bam,cram,sam}"), emit: bam
 
     script:
     """

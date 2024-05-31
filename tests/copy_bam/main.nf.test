@@ -4,18 +4,34 @@ nextflow_process {
     script "./main.nf"
     process "COPY_BAM"
 
-    test("Should run without failures") {
+    test("bam header") {
 
         when {
             process {
                 """
-                input[0] = file("tests/test.paired_end.bam")
+                input[0] = file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true)
                 """
             }
         }
 
         then {
-            helloBam()
+            assert snapshot(path(process.out.bam.get(0)).getBamHeader()).match("header")
+        }
+
+    }
+
+    test("bam reads") {
+
+        when {
+            process {
+                """
+                input[0] = file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true)
+                """
+            }
+        }
+
+        then {
+            assert snapshot(path(process.out.bam.get(0)).getBamReads()).match("reads")
         }
 
     }
