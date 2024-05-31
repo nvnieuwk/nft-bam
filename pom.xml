@@ -31,23 +31,16 @@
 		<maven.compiler.release>8</maven.compiler.release>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<junit.version>5.9.1</junit.version>
+		<htsjdk.version>4.1.0</htsjdk.version>
 		<additionalparam>-Xdoclint:none</additionalparam>
 	</properties>
 
 
 	<dependencies>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-
         <dependency>
 			<groupId>com.github.samtools</groupId>
 			<artifactId>htsjdk</artifactId>
-			<version>4.1.0</version>
+			<version>${htsjdk.version}</version>
 		</dependency>
 	</dependencies>
 
