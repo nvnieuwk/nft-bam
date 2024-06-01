@@ -2,6 +2,7 @@ package nvnieuwk.nf.test.bam;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import htsjdk.samtools.SamReader;
 import htsjdk.samtools.SamReaderFactory;
@@ -12,11 +13,11 @@ import htsjdk.samtools.SAMRecordIterator;
 
 public class AlignmentFile {
 
-    final private static SamReader fileReader
+    private static SamReader fileReader;
 
-    public static void AlignmentFile(Path alignmentFileName) {
-        fileReader = SamReader samReader = SamReaderFactory.makeDefault()
-            .open(SamInputResource.of(bamFileName));
+    public AlignmentFile(Path alignmentFileName) {
+        fileReader = SamReaderFactory.makeDefault()
+            .open(SamInputResource.of(alignmentFileName));
     }
 
 	public static String[] getBamHeader() throws IOException {
