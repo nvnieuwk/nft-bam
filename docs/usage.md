@@ -1,0 +1,173 @@
+# Usage
+
+The plugin adds one new function to be able to parse the SAM/BAM/CRAM files correctly. This function is called `bam()`.
+
+## `bam()` function
+
+The function has one mandatory argument: 
+
+- The BAM/CRAM/SAM file used as output of the process/workflow
+
+```groovy title="main.nf.test"
+then {
+    bam("<process or workflow output that contains the SAM/BAM/CRAM file>")
+}
+```
+
+The function has one optional argument: 
+
+- The reference FASTA file. This is necessary for some operations on CRAM files.
+
+```groovy title="main.nf.test"
+then {
+    bam("<SAM/BAM/CRAM>", "<reference_fasta>")
+}
+```
+
+The fasta can either be a local file or a file URL (currently only supports HTTP and HTTPS protocols)
+
+The function can also be called as `sam()` or `cram()`. These are simply aliases of the `bam()` function and will do exactly the same thing.
+
+This will create an `AlignmentFile` object which has several methods to access the content of the SAM/BAM/CRAM file
+
+### `.getHeader()` method
+
+The `.getHeader()` method returns a list of all header lines:
+
+=== "main.nf.test"
+
+    ```groovy
+    then {
+        bam("...").getHeader()
+    }
+    ```
+
+=== "Example output"
+
+    ```groovy
+    [
+        "@HD\tVN:1.6\tSO:unsorted",
+        "@SQ\tSN:MT192765.1\tLN:29829",
+        "@RG\tID:1\tLB:lib1\tPL:ILLUMINA\tSM:test\tPU:barcode1",
+        "@PG\tID:minimap2\tPN:minimap2\tVN:2.17-r941\tCL:minimap2 -ax sr tests/data/fasta/sarscov2/GCA_011545545.1_ASM1154554v1_genomic.fna tests/data/fastq/dna/sarscov2_1.fastq.gz tests/data/fastq/dna/sarscov2_2.fastq.gz",
+        "@PG\tID:samtools\tPN:samtools\tPP:minimap2\tVN:1.11\tCL:samtools view -Sb sarscov2_aln.sam"
+    ]   
+    ```
+
+### `.getReads()` method
+
+!!! example "A reference is needed here for CRAM files"
+
+The `.getReads()` method returns a list of all raw reads from the alignment file:
+
+=== "main.nf.test"
+
+    ```groovy
+    then {
+        bam("...").getReads()
+    }
+    ```
+
+=== "Example output"
+
+    ```groovy
+    [
+        "ACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTGCTGAAATTGTTGACACTGTGAGTGCTTTGGTTTATGA",
+        "ATGTGTACATTGGCGACCCTGCTCAATTACCTGCACCACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTG",
+        "GCATAGACGGTGCTTTACTTACAAAGTCCTCAGAATACAAAGGTCCTATTACGGATGTTTTCTACAAAGAAAACAGT",
+        "GCATAGACGGTGCTTTACTTACAAAGTCCTCAGAATACAAAGGTCCTATTACGGATGTTTTCTACAAAGAAAACAGT",
+        "TAGGTGAGTTAGGTGATGTTAGAGAAACAATGAGTTACTTGTTTCAACATGCCAATTTAGATTCTTGCAAAAGAGTCTTGAACGTGGTGTGTAAAACTTGTGGACAACAGCAGACAACCCTTAAGGGTGTAGAAGCTGTTATGTAC",
+        "TTACAGAGCAAGGGCTGGTGAAGCTGCTAACTTTTGTGCACTTATCTTAGCCTACTGTAATAAGACAGTAGGTGAGTTAGGTGATGTTAGAGAAACAATGAGTTACTTGTTTCAACATGCCAATTTAGATTCTTGCAAAAGAGTCTTGAA",
+        "GTCTACAAGCTGGTAATGCAACAGAAGTGCCTGCCAATTCAACTGTATTATCTTTCTGTGCTTTTGCTGTAGATGCTGCTAAAGCTTACAAAGATTATCTAGCTAGTGGGGGACAACCAATCACTAATTGTG",
+        "GTCTACAAGCTGGTAATGCAACAGAAGTGCCTGCCAATTCAACTGTATTATCTTTCTGTGCTTTTGCTGTAGATGCTGCTAAAGCTTACAAAGATTATCTAGCTAGTGGGGGACAACCAATCACTAATTGTG",
+        "AACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGT",
+        "AACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCC",
+        "ACTTTCCAAAGTGCAGTCAAAAGAACAATCACGGGTACACACCACTGGTTGTTACTCACAATTTTGACTTCACTTTTAG",
+        ...
+    ]
+    ```
+
+You can also supply an integer to the function to limit the amount of reads the function returns:
+
+=== "main.nf.test"
+
+    ```groovy
+    then {
+        bam("...").getReads(2)
+    }
+    ```
+
+=== "Example output"
+
+    ```groovy
+    [
+        "ACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTGCTGAAATTGTTGACACTGTGAGTGCTTTGGTTTATGA"
+    ]
+    ```
+
+### `.getSamLines()` method
+
+!!! example "A reference is needed here for CRAM files"
+
+The `.getSamLines()` method returns a list of all lines from the alignment file:
+
+=== "main.nf.test"
+
+    ```groovy
+    then {
+        bam("...").getSamLines()
+    }
+    ```
+
+=== "Example output"
+
+    ```groovy
+    [
+        "ERR5069949.2151832\t83\tMT192765.1\t17453\t60\t150M\t=\t17416\t-187\tACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTGCTGAAATTGTTGACACTGTGAGTGCTTTGGTTTATGA\tAAAA<EEEEEEAEEEAEAAAAEEEEEEEEEAAAEE<EEEEEAAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEAAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAAAAAA\ts1:i:183\ts2:i:0\tRG:Z:1\tNM:i:0\tAS:i:300\tde:f:0.0\trl:i:0\tcm:i:13\tnn:i:0\ttp:A:P\tms:i:300\n",
+        "ERR5069949.2151832\t163\tMT192765.1\t17416\t60\t150M\t=\t17453\t187\tATGTGTACATTGGCGACCCTGCTCAATTACCTGCACCACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTG\tAAAAAEEEEEEEEEE/EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEEEEEEE/EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAAEEEEEEEAEEEEEAAEEEEEEEEEAAEAAA<<EAAEEEEEEEAAA<<<AE\ts1:i:183\ts2:i:47\tRG:Z:1\tNM:i:0\tAS:i:300\tde:f:0.0\trl:i:0\tcm:i:14\tnn:i:0\ttp:A:P\tms:i:300\n",
+        "ERR5069949.576388\t83\tMT192765.1\t5798\t50\t77M\t=\t5798\t-77\tGCATAGACGGTGCTTTACTTACAAAGTCCTCAGAATACAAAGGTCCTATTACGGATGTTTTCTACAAAGAAAACAGT\tEA/AEEE/<EEEEEEEEEEEAA<EEEEEEEEEEEEEEEEEEEEEAEEEEEAEEEAEE6/EEEAEEEEEEEEEA6AAA\ts1:i:62\ts2:i:0\tRG:Z:1\tNM:i:0\tAS:i:154\tde:f:0.0\trl:i:0\tcm:i:1\tnn:i:0\ttp:A:P\tms:i:154\n",
+        "ERR5069949.576388\t163\tMT192765.1\t5798\t60\t77M\t=\t5798\t77\tGCATAGACGGTGCTTTACTTACAAAGTCCTCAGAATACAAAGGTCCTATTACGGATGTTTTCTACAAAGAAAACAGT\tAAAAA6EEAEEEEEAEEAEEAEEEEEEA6EEEEAEEAEEEEE6EEEEEEAEEEEA///A<<EEEEEEEEEAEEEEEE\ts1:i:62\ts2:i:0\tRG:Z:1\tNM:i:0\tAS:i:154\tde:f:0.0\trl:i:0\tcm:i:10\tnn:i:0\ttp:A:P\tms:i:154\n",
+        ...
+    ] 
+    ```
+
+You can also supply an integer to the function to limit the amount of lines the function returns:
+
+=== "main.nf.test"
+
+    ```groovy
+    then {
+        bam("...").getSamLines(2)
+    }
+    ```
+
+=== "Example output"
+
+    ```groovy
+    [
+        "ERR5069949.2151832\t83\tMT192765.1\t17453\t60\t150M\t=\t17416\t-187\tACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTGCTGAAATTGTTGACACTGTGAGTGCTTTGGTTTATGA\tAAAA<EEEEEEAEEEAEAAAAEEEEEEEEEAAAEE<EEEEEAAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEAAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAAAAAA\ts1:i:183\ts2:i:0\tRG:Z:1\tNM:i:0\tAS:i:300\tde:f:0.0\trl:i:0\tcm:i:13\tnn:i:0\ttp:A:P\tms:i:300\n",
+        "ERR5069949.2151832\t163\tMT192765.1\t17416\t60\t150M\t=\t17453\t187\tATGTGTACATTGGCGACCCTGCTCAATTACCTGCACCACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTG\tAAAAAEEEEEEEEEE/EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEEEEEEE/EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAAEEEEEEEAEEEEEAAEEEEEEEEEAAEAAA<<EAAEEEEEEEAAA<<<AE\ts1:i:183\ts2:i:47\tRG:Z:1\tNM:i:0\tAS:i:300\tde:f:0.0\trl:i:0\tcm:i:14\tnn:i:0\ttp:A:P\tms:i:300\n"
+    ] 
+    ```
+
+### `.getFileType()` method
+
+The `.getFileType()` method returns the type ("SAM", "BAM" or "CRAM") of the input file:
+
+=== "main.nf.test"
+
+    ```groovy
+    then {
+        bam("test.bam").getFileType()
+    }
+    ```
+
+=== "Example output"
+
+    ```groovy
+    "BAM"
+    ```
+
+## Examples
+
+Have a look at the [plugin tests](https://github.com/nvnieuwk/nft-bam/blob/main/tests/copy_bam/main.nf.test) to see some example implementations.
