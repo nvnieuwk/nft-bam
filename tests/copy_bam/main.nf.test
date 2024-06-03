@@ -19,7 +19,7 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { bam(it).getBamHeader() }).match("header")
+            assert snapshot(process.out.bam.collect { it.endsWith(".cram") ? cram(it, "${baseDir}/tests/genome.fasta").getBamHeader() : bam(it).getBamHeader() }).match("header")
         }
 
     }
@@ -39,7 +39,7 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { bam(it).getBamReads() }).match("raw reads")
+            assert snapshot(process.out.bam.collect { it.endsWith(".cram") ? cram(it, "${baseDir}/tests/genome.fasta").getBamReads() : bam(it).getBamReads()  }).match("raw reads")
         }
 
     }

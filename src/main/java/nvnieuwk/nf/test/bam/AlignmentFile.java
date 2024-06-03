@@ -15,9 +15,15 @@ public class AlignmentFile {
 
     private static SamReader fileReader;
 
-    public AlignmentFile(Path alignmentFileName) {
-        fileReader = SamReaderFactory.makeDefault()
-            .open(SamInputResource.of(alignmentFileName));
+    public AlignmentFile(Path alignmentFile, Path reference) {
+		if(reference != null) {
+	        fileReader = SamReaderFactory.makeDefault()
+				.referenceSequence(reference)
+        	    .open(SamInputResource.of(alignmentFile));
+		} else {
+			fileReader = SamReaderFactory.makeDefault()
+    	        .open(SamInputResource.of(alignmentFile));
+		};
     }
 
 	public static String[] getBamHeader() throws IOException {
