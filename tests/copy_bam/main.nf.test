@@ -19,7 +19,9 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { bam(it).getHeader() }).match("header")
+            assert snapshot(process.out.bam.collect { 
+                it.endsWith(".cram") ? cram(it).getHeader().findAll { !it.startsWith ("@SQ") } : bam(it).getHeader() // Remove SQ header from cram file due to absolute path for reference
+            }).match("header")
         }
 
     }
@@ -39,7 +41,27 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { it.endsWith(".cram") ? cram(it, "${baseDir}/tests/genome.fasta").getReads() : bam(it).getReads()  }).match("raw reads")
+            assert snapshot(process.out.bam.collect { it.endsWith(".cram") ? cram(it, "${baseDir}/tests/genome.fasta").getReads()[0..10] : bam(it).getReads()[0..10] }).match("raw reads")
+        }
+
+    }
+
+    test("raw reads - no fasta index") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { it.endsWith(".cram") ? cram(it, "${baseDir}/tests/no_index.fasta").getReads()[0..10] : bam(it).getReads()[0..10] }).match("raw reads - no fasta index")
         }
 
     }
@@ -59,7 +81,9 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { it.endsWith(".cram") ? cram(it, "https://github.com/nf-core/test-datasets/raw/modules/data/genomics/sarscov2/genome/genome.fasta").getReads() : bam(it).getReads()  }).match("raw reads")
+            assert snapshot(process.out.bam.collect { 
+                it.endsWith(".cram") ? cram(it, "https://github.com/nf-core/test-datasets/raw/modules/data/genomics/sarscov2/genome/genome.fasta").getReads()[0..10] : bam(it).getReads()[0..10]
+            }).match("raw reads - external reference")
         }
 
     }

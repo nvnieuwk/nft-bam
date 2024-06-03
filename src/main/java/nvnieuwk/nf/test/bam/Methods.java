@@ -10,6 +10,9 @@ import java.nio.file.StandardCopyOption;
 import java.net.URISyntaxException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.HttpURLConnection;
+
+import htsjdk.samtools.reference.FastaSequenceIndexCreator;
 
 public class Methods {
 
@@ -19,17 +22,32 @@ public class Methods {
 		Path referencePath;
 		if(refString.startsWith("https://") || refString.startsWith("http://")) {
 			// Download and access a reference file given through a URL
-			InputStream in = new URL(refString).openStream();
+			InputStream refStream = new URL(refString).openStream();
 			final String dir = System.getProperty("java.io.tmpdir") + "/nft-bam-urlfiles/";
 			final File dirFile = new File(dir);
 			if(!dirFile.exists()) {
 				dirFile.mkdirs();
 			}
 			final String copyRefName = dir + refString.substring(refString.lastIndexOf("/") + 1).trim();
-			Files.copy(in, Paths.get(copyRefName), StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(refStream, Paths.get(copyRefName), StandardCopyOption.REPLACE_EXISTING);
 			referencePath = Paths.get(copyRefName);
+
+			// Handle index fetching or creation
+			final String indexString = refString + ".fai";
+			final URL indexUrl = new URL(indexString);
+			final HttpURLConnection huc = (HttpURLConnection) indexUrl.openConnection();
+			if(huc.getResponseCode() == 200) {
+				InputStream indexStream = new URL(indexString).openStream();
+				final String copyIndexName = dir + indexString.substring(indexString.lastIndexOf("/") + 1).trim();
+				Files.copy(indexStream, Paths.get(copyIndexName), StandardCopyOption.REPLACE_EXISTING);
+			} else {
+				createRefIndex(referencePath);
+			}
 		} else if(reference != "") {
 			referencePath = Paths.get(refString);
+			if(!(new File(refString + ".fai").exists())) {
+				createRefIndex(referencePath);
+			}
 		} else {
 			referencePath = null;
 		}
@@ -54,6 +72,10 @@ public class Methods {
 
 	public static AlignmentFile sam(CharSequence samFile) throws URISyntaxException, MalformedURLException, IOException {
 		return bam(samFile, "");
+	}
+
+	private static void createRefIndex(Path fasta) throws IOException {
+		FastaSequenceIndexCreator.create(fasta, true);
 	}
 
 }
