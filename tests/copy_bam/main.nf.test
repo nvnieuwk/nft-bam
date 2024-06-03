@@ -19,7 +19,7 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { it.endsWith(".cram") ? cram(it, "${baseDir}/tests/genome.fasta").getBamHeader() : bam(it).getBamHeader() }).match("header")
+            assert snapshot(process.out.bam.collect { bam(it).getHeader() }).match("header")
         }
 
     }
@@ -39,7 +39,47 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { it.endsWith(".cram") ? cram(it, "${baseDir}/tests/genome.fasta").getBamReads() : bam(it).getBamReads()  }).match("raw reads")
+            assert snapshot(process.out.bam.collect { it.endsWith(".cram") ? cram(it, "${baseDir}/tests/genome.fasta").getReads() : bam(it).getReads()  }).match("raw reads")
+        }
+
+    }
+
+    test("raw reads - external reference") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { it.endsWith(".cram") ? cram(it, "https://github.com/nf-core/test-datasets/raw/modules/data/genomics/sarscov2/genome/genome.fasta").getReads() : bam(it).getReads()  }).match("raw reads")
+        }
+
+    }
+
+    test("file types") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { bam(it).getFileType()  }).match("file types")
         }
 
     }

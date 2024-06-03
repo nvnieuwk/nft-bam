@@ -26,13 +26,13 @@ public class AlignmentFile {
 		};
     }
 
-	public static String[] getBamHeader() throws IOException {
+	public static String[] getHeader() throws IOException {
         final String[] header = fileReader.getFileHeader().getSAMString().split("\n");
         fileReader.close();
 		return header;
 	}
 
-	public static ArrayList<String> getBamReads() throws IOException {
+	public static ArrayList<String> getReads() throws IOException {
 		final SAMRecordIterator recordsIterator = fileReader.iterator();
 		ArrayList<String> reads = new ArrayList<String>();
 		while(recordsIterator.hasNext()) {
@@ -40,6 +40,10 @@ public class AlignmentFile {
 		}
         fileReader.close();
 		return reads;
+	}
+
+	public static String getFileType() {
+		return fileReader.type().name();
 	}
 
 }

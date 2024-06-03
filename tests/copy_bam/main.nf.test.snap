@@ -649,5 +649,19 @@
             "nextflow": "24.04.1"
         },
         "timestamp": "2024-06-03T10:20:14.884421217"
+    },
+    "file types": {
+        "content": [
+            [
+                "BAM",
+                "CRAM",
+                "SAM"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.1"
+        },
+        "timestamp": "2024-06-03T10:36:27.210178965"
     }
 }
