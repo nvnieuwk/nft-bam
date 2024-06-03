@@ -42,6 +42,16 @@ public class AlignmentFile {
 		return reads;
 	}
 
+	public static ArrayList<String> getSamLines() throws IOException {
+		final SAMRecordIterator recordsIterator = fileReader.iterator();
+		ArrayList<String> reads = new ArrayList<String>();
+		while(recordsIterator.hasNext()) {
+			reads.add(recordsIterator.next().getSAMString());
+		}
+        fileReader.close();
+		return reads;
+	}
+
 	public static String getFileType() {
 		return fileReader.type().name();
 	}
