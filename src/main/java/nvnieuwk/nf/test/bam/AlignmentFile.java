@@ -32,24 +32,36 @@ public class AlignmentFile {
 		return header;
 	}
 
-	public static ArrayList<String> getReads() throws IOException {
+	public static ArrayList<String> getReads(int linesToReturn) throws IOException {
 		final SAMRecordIterator recordsIterator = fileReader.iterator();
 		ArrayList<String> reads = new ArrayList<String>();
-		while(recordsIterator.hasNext()) {
+		int count = 0;
+		while(recordsIterator.hasNext() && (count < linesToReturn || linesToReturn == -1)) {
+			count++;
 			reads.add(recordsIterator.next().getReadString());
 		}
         fileReader.close();
 		return reads;
 	}
 
-	public static ArrayList<String> getSamLines() throws IOException {
+	public static ArrayList<String> getReads() throws IOException {
+		return getReads(-1);
+	}
+
+	public static ArrayList<String> getSamLines(int linesToReturn) throws IOException {
 		final SAMRecordIterator recordsIterator = fileReader.iterator();
 		ArrayList<String> reads = new ArrayList<String>();
-		while(recordsIterator.hasNext()) {
+		int count = 0;
+		while(recordsIterator.hasNext() && (count < linesToReturn || linesToReturn == -1)) {
+			count++;
 			reads.add(recordsIterator.next().getSAMString());
 		}
         fileReader.close();
 		return reads;
+	}
+
+	public static ArrayList<String> getSamLines() throws IOException {
+		return getSamLines(-1);
 	}
 
 	public static String getFileType() {

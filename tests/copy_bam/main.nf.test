@@ -41,7 +41,7 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { it.endsWith(".cram") ? cram(it, "${baseDir}/tests/genome.fasta").getReads()[0..10] : bam(it).getReads()[0..10] }).match("raw reads")
+            assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/genome.fasta").getReads(11) }).match("raw reads")
         }
 
     }
@@ -61,7 +61,7 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { it.endsWith(".cram") ? cram(it, "${baseDir}/tests/no_index.fasta").getReads()[0..10] : bam(it).getReads()[0..10] }).match("raw reads - no fasta index")
+            assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/no_index.fasta").getReads(11) }).match("raw reads - no fasta index")
         }
 
     }
@@ -82,8 +82,28 @@ nextflow_process {
 
         then {
             assert snapshot(process.out.bam.collect { 
-                it.endsWith(".cram") ? cram(it, "https://github.com/nf-core/test-datasets/raw/modules/data/genomics/sarscov2/genome/genome.fasta").getReads()[0..10] : bam(it).getReads()[0..10]
+                bam(it, "https://github.com/nf-core/test-datasets/raw/modules/data/genomics/sarscov2/genome/genome.fasta").getReads(11)
             }).match("raw reads - external reference")
+        }
+
+    }
+
+    test("raw reads - no limit") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/genome.fasta").getReads().size() }).match("raw reads - no limit")
         }
 
     }
@@ -103,7 +123,7 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { bam(it).getFileType()  }).match("file types")
+            assert snapshot(process.out.bam.collect { bam(it).getFileType() }).match("file types")
         }
 
     }
@@ -123,7 +143,27 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/genome.fasta").getSamLines()[0..10] }).match("sam lines")
+            assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/genome.fasta").getSamLines(11) }).match("sam lines")
+        }
+
+    }
+
+    test("sam lines - no limit") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/genome.fasta").getSamLines().size() }).match("sam lines - no limit")
         }
 
     }
