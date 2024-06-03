@@ -1,9 +1,7 @@
 name: build docs
 on:
   push:
-    branches:
-      - master
-      - main
+    branches: [main]
 permissions:
   contents: write
 jobs:
@@ -22,6 +20,7 @@ jobs:
           version=$(grep "moduleVersion" src/main/resources/META-INF/nf-test-plugin | sed -e s'/[^=]*=//')
           [[ $version == *"dev"* ]] && pipeline_version="dev" || pipeline_version=$version
           echo "pipeline_version=$pipeline_version" >> $GITHUB_ENV
+      - name: Setup git user
         run: |
           git config --global user.name "${{github.actor}}"
           git config --global user.email "${{github.actor}}@users.noreply.github.com"
