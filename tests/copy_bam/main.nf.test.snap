@@ -196,6 +196,34 @@
         },
         "timestamp": "2024-06-03T13:14:39.411792552"
     },
+    "raw reads - no limit": {
+        "content": [
+            [
+                200,
+                200,
+                200
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.1"
+        },
+        "timestamp": "2024-06-03T13:27:52.489858446"
+    },
+    "sam lines - no limit": {
+        "content": [
+            [
+                200,
+                200,
+                200
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.1"
+        },
+        "timestamp": "2024-06-03T13:28:16.109610954"
+    },
     "raw reads - no fasta index": {
         "content": [
             [
