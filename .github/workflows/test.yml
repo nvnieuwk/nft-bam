@@ -2,10 +2,10 @@ name: Run plugin tests
 on:
   push:
   pull_request:
-    branches: [master]
+    branches: [main]
   merge_group:
     types: [checks_requested]
-    branches: [master]
+    branches: [main]
 
 jobs:
   test:
