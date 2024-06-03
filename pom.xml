@@ -5,7 +5,7 @@
 
 	<groupId>com.nvnieuwk</groupId>
 	<artifactId>nft-bam</artifactId>
-	<version>0.1.0dev</version>
+	<version>0.1.0</version>
 	<packaging>jar</packaging>
 
 	<name>nft-bam</name>
