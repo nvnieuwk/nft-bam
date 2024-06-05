@@ -2,11 +2,6 @@
 
 nft-bam is an nf-test plugin to make working with SAM, BAM or CRAM files easier. 
 
-!!! warning
-
-    nft-bam is currently in it's beta phase. Use at your own risk!
-    Everything can change without prior notice so please pin your plugin version to avoid breaking your tests.
-
 ## Start using the plugin
 
 To start using the plugin please add it to your `nf-test.config` file:
