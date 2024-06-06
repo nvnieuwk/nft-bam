@@ -11,7 +11,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-06-06T14:41:54.923683954"
+        "timestamp": "2024-06-06T15:06:18.671359449"
     },
     "raw reads": {
         "content": [
@@ -61,7 +61,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-06-06T14:38:40.369849311"
+        "timestamp": "2024-06-06T15:05:15.700568933"
     },
     "raw reads - external reference": {
         "content": [
@@ -111,7 +111,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-06-06T14:39:08.423832497"
+        "timestamp": "2024-06-06T15:05:36.23603148"
     },
     "raw reads MD5": {
         "content": [
@@ -125,7 +125,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-06-06T14:39:20.416211356"
+        "timestamp": "2024-06-06T15:05:49.775720647"
     },
     "header": {
         "content": [
@@ -158,7 +158,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-06-06T14:38:34.941884974"
+        "timestamp": "2024-06-06T15:04:51.821423768"
     },
     "file types": {
         "content": [
@@ -172,7 +172,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-06-06T14:39:25.890502698"
+        "timestamp": "2024-06-06T15:06:01.26041052"
     },
     "sam lines": {
         "content": [
@@ -222,7 +222,20 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-06-06T14:39:31.287232754"
+        "timestamp": "2024-06-06T15:06:06.968034179"
+    },
+    "header MD5": {
+        "content": [
+            [
+                "e5a7759c918e448cbb222ec130a6c476",
+                "4ab674cd5f921b2b5c68642aeb0ab3f4"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-06T15:05:02.449909172"
     },
     "raw reads - no limit": {
         "content": [
@@ -236,20 +249,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-06-06T14:39:13.778066069"
-    },
-    "header MD5": {
-        "content": [
-            [
-                "e5a7759c918e448cbb222ec130a6c476",
-                "4ab674cd5f921b2b5c68642aeb0ab3f4"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-06-06T14:46:56.310190241"
+        "timestamp": "2024-06-06T15:05:44.298940185"
     },
     "sam lines - no limit": {
         "content": [
@@ -263,7 +263,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-06-06T14:39:36.346552153"
+        "timestamp": "2024-06-06T15:06:12.656764439"
     },
     "raw reads - no fasta index": {
         "content": [
@@ -313,6 +313,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-06-06T14:38:50.565974817"
+        "timestamp": "2024-06-06T15:05:28.165717618"
     }
 }
