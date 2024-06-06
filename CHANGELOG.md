@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2.0
+
+### New features
+
+Added some new methods:
+
+1. `getHeaderMD5()`: Returns the MD5 checksum of the header
+2. `getReadsMD5()`: Returns the MD5 checksum of the raw reads
+3. `getSamLinesMD5()`: Returns the MD5 checksum of the plain SAM lines
+
 ## v0.1.1
 
 ### Fixes
