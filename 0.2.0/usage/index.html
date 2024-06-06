@@ -654,8 +654,9 @@
 </div>
 <div class="tabbed-block">
 <div class="language-groovy highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">[</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="s2">&quot;ACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTGCTGAAATTGTTGACACTGTGAGTGCTTTGGTTTATGA&quot;</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="o">]</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="s2">&quot;ACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTGCTGAAATTGTTGACACTGTGAGTGCTTTGGTTTATGA&quot;</span><span class="o">,</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="s2">&quot;ATGTGTACATTGGCGACCCTGCTCAATTACCTGCACCACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTG&quot;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="o">]</span>
 </span></code></pre></div>
 </div>
 </div>
@@ -690,36 +691,31 @@
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<p><code>``groovy
-[
-    "ERR5069949.2151832\t83\tMT192765.1\t17453\t60\t150M\t=\t17416\t-187\tACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTGCTGAAATTGTTGACACTGTGAGTGCTTTGGTTTATGA\tAAAA&lt;EEEEEEAEEEAEAAAAEEEEEEEEEAAAEE&lt;EEEEEAAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEAAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAAAAAA\ts1:i:183\ts2:i:0\tRG:Z:1\tNM:i:0\tAS:i:300\tde:f:0.0\trl:i:0\tcm:i:13\tnn:i:0\ttp:A:P\tms:i:300\n",
-    "ERR5069949.2151832\t163\tMT192765.1\t17416\t60\t150M\t=\t17453\t187\tATGTGTACATTGGCGACCCTGCTCAATTACCTGCACCACGCACATTG3457
-                 ###</code>.getHeader()` method</p>
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="o">[</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="s2">&quot;ERR5069949.2151832\t83\tMT192765.1\t17453\t60\t150M\t=\t17416\t-187\tACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTGCTGAAATTGTTGACACTGTGAGTGCTTTGGTTTATGA\tAAAA&lt;EEEEEEAEEEAEAAAAEEEEEEEEEAAAEE&lt;EEEEEAAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEAAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAAAAAA\ts1:i:183\ts2:i:0\tRG:Z:1\tAS:i:300\tde:f:0.0\trl:i:0\tcm:i:13\tnn:i:0\ttp:A:P\tms:i:300\n&quot;</span><span class="o">,</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="s2">&quot;ERR5069949.2151832\t163\tMT192765.1\t17416\t60\t150M\t=\t17453\t187\tATGTGTACATTGGCGACCCTGCTCAATTACCTGCACCACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTG\tAAAAAEEEEEEEEEE/EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEEEEEEE/EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAAEEEEEEEAEEEEEAAEEEEEEEEEAAEAAA&lt;&lt;EAAEEEEEEEAAA&lt;&lt;&lt;AE\ts1:i:183\ts2:i:47\tRG:Z:1\tAS:i:300\tde:f:0.0\trl:i:0\tcm:i:14\tnn:i:0\ttp:A:P\tms:i:300\n&quot;</span><span class="o">,</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="s2">&quot;ERR5069949.576388\t83\tMT192765.1\t5798\t50\t77M\t=\t5798\t-77\tGCATAGACGGTGCTTTACTTACAAAGTCCTCAGAATACAAAGGTCCTATTACGGATGTTTTCTACAAAGAAAACAGT\tEA/AEEE/&lt;EEEEEEEEEEEAA&lt;EEEEEEEEEEEEEEEEEEEEEAEEEEEAEEEAEE6/EEEAEEEEEEEEEA6AAA\ts1:i:62\ts2:i:0\tRG:Z:1\tAS:i:154\tde:f:0.0\trl:i:0\tcm:i:1\tnn:i:0\ttp:A:P\tms:i:154\n&quot;</span><span class="o">,</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="s2">&quot;ERR5069949.576388\t163\tMT192765.1\t5798\t60\t77M\t=\t5798\t77\tGCATAGACGGTGCTTTACTTACAAAGTCCTCAGAATACAAAGGTCCTATTACGGATGTTTTCTACAAAGAAAACAGT\tAAAAA6EEAEEEEEAEEAEEAEEEEEEA6EEEEAEEAEEEEE6EEEEEEAEEEEA///A&lt;&lt;EEEEEEEEEAEEEEEE\ts1:i:62\ts2:i:0\tRG:Z:1\tAS:i:154\tde:f:0.0\trl:i:0\tcm:i:10\tnn:i:0\ttp:A:P\tms:i:154\n&quot;</span><span class="o">,</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="o">...</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="o">]</span><span class="w"> </span>
+</span></code></pre></div>
 </div>
 </div>
 </div>
-<p>...................^
-  Nextflow stdout:
-  CTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTG\tAAAAAEEEEEEEEEE/EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEEEEEEE/EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAAEEEEEEEAEEEEEAAEEEEEEEEEAAEAAA&lt;&lt;EAAEEEEEEEAAA&lt;&lt;&lt;AE\ts1:i:183\ts2:i:47\tRG:Z:1\tNM:i:0\tAS:i:300\tde:f:0.0\trl:i:0\tcm:i:14\tnn:i:0\ttp:A:P\tms:i:300\n",
-        "ERR5069949.576388\t83\tMT192765.1\t5798\t50\t77M\t=\t5798\t-77\tGCATAGACGGTGCTTTACTTACAAAGTCCTCAGAATACAAAGGTCCTATTACGGATGTTTTCTACAAAGAAAACAGT\tEA/AEEE/&lt;EEEEEEEEEEEAA&lt;EEEEEEEEEEEEEEEEEEEEEAEEEEEAEEEAEE6/EEEAEEEEEEEEEA6AAA\ts1:i:62\ts2:i:0\tRG:Z:1\tNM:i:0\tAS:i:154\tde:f:0.0\trl:i:0\tcm:i:1\tnn:i:0\ttp:A:P\tms:i:154\n",
-        "ERR5069949.576388\t163\tMT192765.1\t5798\t60\t77M\t=\t5798\t77\tGCATAGACGGTGCTTTACTTACAAAGTCCTCAGAATACAAAGGTCCTATTACGGATGTTTTCTACAAAGAAAACAGT\tAAAAA6EEAEEEEEAEEAEEAEEEEEEA6EEEEAEEAEEEEE6EEEEEEAEEEEA///A&lt;&lt;EEEEEEEEEAEEEEEE\ts1:i:62\ts2:i:0\tRG:Z:1\tNM:i:0\tAS:i:154\tde:f:0.0\trl:i:0\tcm:i:10\tnn:i:0\ttp:A:P\tms:i:154\n",
-        ...
-    ] 
-    ```</p>
 <p>You can also supply an integer to the function to limit the amount of lines the function returns:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">main.nf.test</label><label for="__tabbed_7_2">Example output</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-groovy highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;...&quot;</span><span class="o">).</span><span class="na">getSamLines</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="o">}</span>
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;...&quot;</span><span class="o">).</span><span class="na">getSamLines</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="o">}</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-groovy highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="o">[</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="s2">&quot;ERR5069949.2151832\t83\tMT192765.1\t17453\t60\t150M\t=\t17416\t-187\tACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTGCTGAAATTGTTGACACTGTGAGTGCTTTGGTTTATGA\tAAAA&lt;EEEEEEAEEEAEAAAAEEEEEEEEEAAAEE&lt;EEEEEAAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEAAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAAAAAA\ts1:i:183\ts2:i:0\tRG:Z:1\tNM:i:0\tAS:i:300\tde:f:0.0\trl:i:0\tcm:i:13\tnn:i:0\ttp:A:P\tms:i:300\n&quot;</span><span class="o">,</span>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="s2">&quot;ERR5069949.2151832\t163\tMT192765.1\t17416\t60\t150M\t=\t17453\t187\tATGTGTACATTGGCGACCCTGCTCAATTACCTGCACCACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTG\tAAAAAEEEEEEEEEE/EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEEEEEEE/EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAAEEEEEEEAEEEEEAAEEEEEEEEEAAEAAA&lt;&lt;EAAEEEEEEEAAA&lt;&lt;&lt;AE\ts1:i:183\ts2:i:47\tRG:Z:1\tNM:i:0\tAS:i:300\tde:f:0.0\trl:i:0\tcm:i:14\tnn:i:0\ttp:A:P\tms:i:300\n&quot;</span>
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="o">]</span><span class="w"> </span>
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="o">[</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="s2">&quot;ERR5069949.2151832\t83\tMT192765.1\t17453\t60\t150M\t=\t17416\t-187\tACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTGCTGAAATTGTTGACACTGTGAGTGCTTTGGTTTATGA\tAAAA&lt;EEEEEEAEEEAEAAAAEEEEEEEEEAAAEE&lt;EEEEEAAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEAAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAAAAAA\ts1:i:183\ts2:i:0\tRG:Z:1\tNM:i:0\tAS:i:300\tde:f:0.0\trl:i:0\tcm:i:13\tnn:i:0\ttp:A:P\tms:i:300\n&quot;</span><span class="o">,</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="s2">&quot;ERR5069949.2151832\t163\tMT192765.1\t17416\t60\t150M\t=\t17453\t187\tATGTGTACATTGGCGACCCTGCTCAATTACCTGCACCACGCACATTGCTAACTAAGGGCACACTAGAACCAGAATATTTCAATTCAGTGTGTAGACTTATGAAAACTATAGGTCCAGACATGTTCCTCGGAACTTGTCGGCGTTGTCCTG\tAAAAAEEEEEEEEEE/EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEEEEEEE/EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAAEEEEEEEAEEEEEAAEEEEEEEEEAAEAAA&lt;&lt;EAAEEEEEEEAAA&lt;&lt;&lt;AE\ts1:i:183\ts2:i:47\tRG:Z:1\tNM:i:0\tAS:i:300\tde:f:0.0\trl:i:0\tcm:i:14\tnn:i:0\ttp:A:P\tms:i:300\n&quot;</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="o">]</span><span class="w"> </span>
 </span></code></pre></div>
 </div>
 </div>
@@ -729,13 +725,13 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">main.nf.test</label><label for="__tabbed_8_2">Example output</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-groovy highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;...&quot;</span><span class="o">).</span><span class="na">getReadsMD5</span><span class="o">()</span>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="o">}</span>
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;...&quot;</span><span class="o">).</span><span class="na">getReadsMD5</span><span class="o">()</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="o">}</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-groovy highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="s2">&quot;448bf7ab4ce921321beca4ca3bd78f06&quot;</span><span class="w">  </span>
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="s2">&quot;448bf7ab4ce921321beca4ca3bd78f06&quot;</span><span class="w">  </span>
 </span></code></pre></div>
 </div>
 </div>
@@ -745,13 +741,13 @@
 <div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">main.nf.test</label><label for="__tabbed_9_2">Example output</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-groovy highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;test.bam&quot;</span><span class="o">).</span><span class="na">getFileType</span><span class="o">()</span>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="o">}</span>
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;test.bam&quot;</span><span class="o">).</span><span class="na">getFileType</span><span class="o">()</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="o">}</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-groovy highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="s2">&quot;BAM&quot;</span>
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="s2">&quot;BAM&quot;</span>
 </span></code></pre></div>
 </div>
 </div>
