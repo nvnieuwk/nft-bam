@@ -26,6 +26,27 @@ nextflow_process {
 
     }
 
+    test("header MD5") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { 
+                bam(it).getHeaderMD5()
+            }).match("header MD5")
+        }
+
+    }
+
     test("raw reads") {
 
         when {
@@ -108,6 +129,26 @@ nextflow_process {
 
     }
 
+    test("raw reads MD5") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/genome.fasta").getReadsMD5() }).match("raw reads MD5")
+        }
+
+    }
+
     test("file types") {
 
         when {
@@ -164,6 +205,27 @@ nextflow_process {
 
         then {
             assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/genome.fasta").getSamLines().size() }).match("sam lines - no limit")
+        }
+
+    }
+
+
+    test("sam lines MD5") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/genome.fasta").getSamLinesMD5() }).match("sam lines MD5")
         }
 
     }
