@@ -4,7 +4,7 @@
   <groupId>com.nvnieuwk</groupId>
   <artifactId>nft-bam</artifactId>
   <name>nft-bam</name>
-  <version>0.2.0dev</version>
+  <version>0.2.0</version>
   <description>nf-test plugin to support SAM/BAM/CRAM formats</description>
   <url>https://github.com/nvnieuwk/nft-bam</url>
   <licenses>
