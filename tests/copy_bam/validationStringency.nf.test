@@ -1,0 +1,44 @@
+nextflow_process {
+
+    name "Test Process COPY_BAM"
+    script "./main.nf"
+    process "COPY_BAM"
+
+    tag "stringency"
+
+    test("don't fail when set to lenient") {
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/error_hg002.bam", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { 
+                bam(it, stringency: "lenient").getReads()
+            }).match("lenient")
+        }       
+    }
+
+    test("don't fail when set to silent") {
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/error_hg002.bam", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { 
+                bam(it, stringency: "silent").getReads()
+            }).match("silent")
+        }       
+    }
+}
