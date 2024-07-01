@@ -19,7 +19,7 @@ nextflow_process {
 
         then {
             assert snapshot(process.out.bam.collect { 
-                bam(it, stringency: "lenient").getReads()
+                bam(it, stringency: "lenient").getReadsMD5()
             }).match("lenient")
         }       
     }
@@ -37,8 +37,30 @@ nextflow_process {
 
         then {
             assert snapshot(process.out.bam.collect { 
-                bam(it, stringency: "silent").getReads()
+                bam(it, stringency: "silent").getReadsMD5()
             }).match("silent")
+        }       
+    }
+
+    test("fail on unknown stringency") {
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/error_hg002.bam", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            try {
+                bam(process.out.bam.get(0), stringency: "unknown").getReads()
+            } catch( IllegalArgumentException e ) {
+                assert snapshot(
+                    e.getMessage()
+                ).match("unknown")
+            }
         }       
     }
 }
