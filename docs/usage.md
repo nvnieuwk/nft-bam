@@ -28,7 +28,15 @@ The fasta can either be a local file or a file URL (currently only supports HTTP
 
 The function can also be called as `sam()` or `cram()`. These are simply aliases of the `bam()` function and will do exactly the same thing.
 
-This will create an `AlignmentFile` object which has several methods to access the content of the SAM/BAM/CRAM file
+Additionally, the `stringency` option can also be used to set the validation stringency of the HTSJDK library. This can be used to silence the validation errors emitted when an alignment file isn't correct. This options accepts 3 possible values: `lenient`, `silent` and `strict`(default).
+
+```groovy title="main.nf.test"
+then(
+    bam("<SAM/BAM/CRAM>", stringency: "lenient")
+)
+```
+
+This will create an `AlignmentFile` object which has several methods to access the content of the SAM/BAM/CRAM file.
 
 ### `.getHeader()` method
 

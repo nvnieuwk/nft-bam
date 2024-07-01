@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.0
+
+### New features
+
+1. Added the `stringency` option to the `bam()` function and all its aliases. This option takes `lenient`, `silent` and `strict`(default) as possible values and is used to set the validation stringency of the HTSJDK library.
+
 ## v0.2.0
 
 ### New features

@@ -9,7 +9,7 @@ To start using the plugin please add it to your `nf-test.config` file:
 ```groovy title="nf-test.config"
 config {
     plugins {
-        load "nft-bam@0.2.0"
+        load "nft-bam@0.3.0"
     }
 }
 ```

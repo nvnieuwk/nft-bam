@@ -1,0 +1,36 @@
+{
+    "silent": {
+        "content": [
+            [
+                "bb6e2fb0828114f50f9f0f7c397ec5e4"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-01T16:58:15.601665934"
+    },
+    "lenient": {
+        "content": [
+            [
+                "bb6e2fb0828114f50f9f0f7c397ec5e4"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-01T16:57:59.925013954"
+    },
+    "unknown": {
+        "content": [
+            "The validation stringency should be one of these: 'STRICT', 'LENIENT', 'SILENT'. Found: UNKNOWN"
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-01T16:56:56.176765731"
+    }
+}
