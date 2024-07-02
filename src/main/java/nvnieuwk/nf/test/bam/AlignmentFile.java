@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Arrays;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.math.BigInteger;
@@ -27,10 +26,11 @@ public class AlignmentFile {
 		}
 		if(options.containsKey("stringency")) {
 			String stringency = options.get("stringency").toString().toUpperCase();
-			if( !Arrays.asList("STRICT", "LENIENT", "SILENT").contains(stringency) ) {
+			try {
+				factory.validationStringency(ValidationStringency.valueOf(stringency));
+			} catch (IllegalArgumentException e) {
 				throw new IllegalArgumentException("The validation stringency should be one of these: 'STRICT', 'LENIENT', 'SILENT'. Found: " + stringency);
 			}
-			factory.validationStringency(ValidationStringency.valueOf(stringency));
 		}
 		SamInputResource inputFile = SamInputResource.of(alignmentFile);
 		fileReader = factory.open(inputFile);
