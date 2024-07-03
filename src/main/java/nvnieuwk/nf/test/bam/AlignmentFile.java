@@ -3,29 +3,38 @@ package nvnieuwk.nf.test.bam;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.math.BigInteger;
 
 import htsjdk.samtools.SamReader;
 import htsjdk.samtools.SamReaderFactory;
+import htsjdk.samtools.ValidationStringency;
 import htsjdk.samtools.SamInputResource;
 import htsjdk.samtools.SAMRecordIterator;
 
 public class AlignmentFile {
 
+	private static SamReaderFactory factory;
     private static SamReader fileReader;
 
-    public AlignmentFile(Path alignmentFile, Path reference) {
+    public AlignmentFile(LinkedHashMap<String,Object> options, Path alignmentFile, Path reference) {
+		factory = SamReaderFactory.makeDefault();
 		if(reference != null) {
-	        fileReader = SamReaderFactory.makeDefault()
-				.referenceSequence(reference)
-        	    .open(SamInputResource.of(alignmentFile));
-		} else {
-			fileReader = SamReaderFactory.makeDefault()
-    	        .open(SamInputResource.of(alignmentFile));
-		};
-    }
+	        factory.referenceSequence(reference);
+		}
+		if(options.containsKey("stringency")) {
+			String stringency = options.get("stringency").toString().toUpperCase();
+			try {
+				factory.validationStringency(ValidationStringency.valueOf(stringency));
+			} catch (IllegalArgumentException e) {
+				throw new IllegalArgumentException("The validation stringency should be one of these: 'STRICT', 'LENIENT', 'SILENT'. Found: " + stringency);
+			}
+		}
+		SamInputResource inputFile = SamInputResource.of(alignmentFile);
+		fileReader = factory.open(inputFile);
+	}
 
 	public static String[] getHeader() throws IOException {
         final String[] header = fileReader.getFileHeader().getSAMString().split("\n");
