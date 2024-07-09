@@ -233,4 +233,4 @@ The `.getFileType()` method returns the type ("SAM", "BAM" or "CRAM") of the inp
 
 ## Examples
 
-Have a look at the [plugin tests](https://github.com/nvnieuwk/nft-bam/blob/main/tests/copy_bam/main.nf.test) to see some example implementations.
+Have a look at the [plugin tests](https://github.com/nvnieuwk/nft-bam/tree/main/tests/copy_bam) to see some example implementations.
