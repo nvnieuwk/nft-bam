@@ -203,7 +203,7 @@ The `.getSamLinesMD5()` method returns the MD5 checksum of the plain SAM lines:
 
     ```groovy
     then {
-        bam("...").getReadsMD5()
+        bam("...").getSamLinesMD5()
     }
     ```
 
