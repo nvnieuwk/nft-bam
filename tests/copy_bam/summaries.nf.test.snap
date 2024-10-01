@@ -1,0 +1,40 @@
+{
+    "statistics": {
+        "content": [
+            [
+                {
+                    "maxReadLength": 151,
+                    "minReadLength": 53,
+                    "meanReadLength": 69,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 28,
+                    "readCount": 400
+                },
+                {
+                    "maxReadLength": 151,
+                    "minReadLength": 53,
+                    "meanReadLength": 69,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 28,
+                    "readCount": 400
+                },
+                {
+                    "maxReadLength": 151,
+                    "minReadLength": 53,
+                    "meanReadLength": 69,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 28,
+                    "readCount": 400
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-01T14:04:58.524275656"
+    }
+}

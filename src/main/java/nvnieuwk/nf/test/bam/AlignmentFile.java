@@ -12,6 +12,7 @@ import htsjdk.samtools.SamReader;
 import htsjdk.samtools.SamReaderFactory;
 import htsjdk.samtools.ValidationStringency;
 import htsjdk.samtools.SamInputResource;
+import htsjdk.samtools.SAMRecord;
 import htsjdk.samtools.SAMRecordIterator;
 
 public class AlignmentFile {
@@ -103,6 +104,58 @@ public class AlignmentFile {
 
 	public static String getFileType() {
 		return fileReader.type().name();
+	}
+
+	public LinkedHashMap<String,Object> getStatistics() throws InterruptedException {
+		// Read length
+		Integer minReadLength = 2000000000; // I don't think we'll have reads this long soon
+		Integer maxReadLength = 0;
+		Integer totalReadLength = 0;
+
+		// Mapping quality
+		Integer totalQuality = 0;
+		Integer maxQuality = 0;
+		Integer minQuality = 10000; // Mapping quality 10000 should never be reached
+
+		// General stats
+		Integer totalReads = 0;
+
+		final SAMRecordIterator recordsIterator = fileReader.iterator();
+		while(recordsIterator.hasNext()) {
+			totalReads++;
+			SAMRecord record = recordsIterator.next();
+
+			// Read length statistics
+			Integer readLength = record.getReadLength();
+			totalReadLength += readLength;
+			if (maxReadLength < readLength) {
+				maxReadLength = readLength;
+			}
+			if (minReadLength > readLength) {
+				minReadLength = readLength;
+			}
+
+			// Mapping quality statistics
+			Integer quality = record.getMappingQuality();
+			totalQuality += quality;
+			if (maxQuality < quality) {
+				maxQuality = quality;
+			}
+			if (minQuality > quality) {
+				minQuality = quality;
+			}
+		}
+
+		LinkedHashMap<String,Object> result = new LinkedHashMap<String,Object>();
+		result.put("maxReadLength", maxReadLength);
+		result.put("minReadLength", minReadLength);
+		result.put("meanReadLength", totalReadLength / totalReads);
+		result.put("maxQuality", maxQuality);
+		result.put("minQuality", minQuality);
+		result.put("meanQuality", totalQuality / totalReads);
+		result.put("readCount", totalReads);
+
+		return result;
 	}
 
 }
