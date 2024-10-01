@@ -1,0 +1,70 @@
+nextflow_process {
+
+    name "Test Process COPY_BAM"
+    script "./main.nf"
+    process "COPY_BAM"
+
+    tag "summaries"
+
+    test("statistics") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/genome.fasta").getStatistics() }).match("statistics")
+        }
+
+    }
+
+
+    test("statistics - include") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/genome.fasta").getStatistics(include:["readCount","meanReadLength"]) }).match("statistics - include")
+        }
+
+    }
+
+    test("statistics - exclude") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/genome.fasta").getStatistics(exclude:["readCount","meanReadLength"]) }).match("statistics - exclude")
+        }
+
+    }
+
+}

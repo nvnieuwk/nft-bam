@@ -1,0 +1,95 @@
+{
+    "statistics - include": {
+        "content": [
+            [
+                {
+                    "readCount": 200,
+                    "meanReadLength": 138
+                },
+                {
+                    "readCount": 200,
+                    "meanReadLength": 138
+                },
+                {
+                    "readCount": 200,
+                    "meanReadLength": 138
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-01T14:51:09.7991085"
+    },
+    "statistics - exclude": {
+        "content": [
+            [
+                {
+                    "maxReadLength": 151,
+                    "minReadLength": 53,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 57
+                },
+                {
+                    "maxReadLength": 151,
+                    "minReadLength": 53,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 57
+                },
+                {
+                    "maxReadLength": 151,
+                    "minReadLength": 53,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 57
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-01T14:51:15.827711874"
+    },
+    "statistics": {
+        "content": [
+            [
+                {
+                    "maxReadLength": 151,
+                    "minReadLength": 53,
+                    "meanReadLength": 138,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 57,
+                    "readCount": 200
+                },
+                {
+                    "maxReadLength": 151,
+                    "minReadLength": 53,
+                    "meanReadLength": 138,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 57,
+                    "readCount": 200
+                },
+                {
+                    "maxReadLength": 151,
+                    "minReadLength": 53,
+                    "meanReadLength": 138,
+                    "maxQuality": 60,
+                    "minQuality": 0,
+                    "meanQuality": 57,
+                    "readCount": 200
+                }
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-01T14:51:55.258906425"
+    }
+}

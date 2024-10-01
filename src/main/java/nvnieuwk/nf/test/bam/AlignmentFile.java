@@ -12,6 +12,7 @@ import htsjdk.samtools.SamReader;
 import htsjdk.samtools.SamReaderFactory;
 import htsjdk.samtools.ValidationStringency;
 import htsjdk.samtools.SamInputResource;
+import htsjdk.samtools.SAMRecord;
 import htsjdk.samtools.SAMRecordIterator;
 
 public class AlignmentFile {
@@ -103,6 +104,92 @@ public class AlignmentFile {
 
 	public static String getFileType() {
 		return fileReader.type().name();
+	}
+
+	public LinkedHashMap<String,Object> getStatistics() throws InterruptedException {
+		return getStatistics(new LinkedHashMap<String,Object>());
+	}
+
+	public LinkedHashMap<String,Object> getStatistics(LinkedHashMap<String,Object> options) throws InterruptedException {
+		ArrayList<String> include = new ArrayList<String>();
+		ArrayList<String> exclude = new ArrayList<String>();
+		if (options.containsKey("include")) {
+			include = Utils.castToStringArray(options.get("include"));
+		}
+		if (options.containsKey("exclude")) {
+			exclude = Utils.castToStringArray(options.get("exclude"));
+		}
+
+
+		// Read length
+		Integer minReadLength = 2000000000; // I don't think we'll have reads this long soon
+		Integer maxReadLength = 0;
+		Integer totalReadLength = 0;
+
+		// Mapping quality
+		Integer totalQuality = 0;
+		Integer maxQuality = 0;
+		Integer minQuality = 10000; // Mapping quality 10000 should never be reached
+
+		// General stats
+		Integer totalReads = 0;
+
+		final SAMRecordIterator recordsIterator = fileReader.iterator();
+		while(recordsIterator.hasNext()) {
+			totalReads++;
+			SAMRecord record = recordsIterator.next();
+
+			// Read length statistics
+			Integer readLength = record.getReadLength();
+			totalReadLength += readLength;
+			if (maxReadLength < readLength) {
+				maxReadLength = readLength;
+			}
+			if (minReadLength > readLength) {
+				minReadLength = readLength;
+			}
+
+			// Mapping quality statistics
+			Integer quality = record.getMappingQuality();
+			totalQuality += quality;
+			if (maxQuality < quality) {
+				maxQuality = quality;
+			}
+			if (minQuality > quality) {
+				minQuality = quality;
+			}
+		}
+
+		LinkedHashMap<String,Object> tempResult = new LinkedHashMap<String,Object>();
+		tempResult.put("maxReadLength", maxReadLength);
+		tempResult.put("minReadLength", minReadLength);
+		tempResult.put("meanReadLength", totalReadLength / totalReads);
+		tempResult.put("maxQuality", maxQuality);
+		tempResult.put("minQuality", minQuality);
+		tempResult.put("meanQuality", totalQuality / totalReads);
+		tempResult.put("readCount", totalReads);
+
+		LinkedHashMap<String,Object> result = tempResult;
+		if(include.size() > 0) {
+			result = new LinkedHashMap<String,Object>();
+            for (int i = 0; i < include.size(); i++) {
+				String key = include.get(i);
+				if (tempResult.containsKey(key)) {
+					result.put(key, tempResult.get(key));
+				}
+			}
+		}
+
+		if(exclude.size() > 0) {
+            for (int i = 0; i < exclude.size(); i++) {
+				String key = exclude.get(i);
+				if (result.containsKey(key)) {
+					result.remove(key);
+				}
+			}
+		}
+
+		return result;
 	}
 
 }

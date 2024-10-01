@@ -11,7 +11,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
-      matrix: 
+      matrix:
         JAVA_VERSION: ["11", "17", "21"]
     steps:
       - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
@@ -26,7 +26,7 @@ jobs:
 
       - name: Install nf-test
         uses: nf-core/setup-nf-test@v1
-      
+
       - name: Build plugin
         run: ./build.sh
 
