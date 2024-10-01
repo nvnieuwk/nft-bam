@@ -107,6 +107,20 @@ public class AlignmentFile {
 	}
 
 	public LinkedHashMap<String,Object> getStatistics() throws InterruptedException {
+		return getStatistics(new LinkedHashMap<String,Object>());
+	}
+
+	public LinkedHashMap<String,Object> getStatistics(LinkedHashMap<String,Object> options) throws InterruptedException {
+		ArrayList<String> include = new ArrayList<String>();
+		ArrayList<String> exclude = new ArrayList<String>();
+		if (options.containsKey("include")) {
+			include = Utils.castToStringArray(options.get("include"));
+		}
+		if (options.containsKey("exclude")) {
+			exclude = Utils.castToStringArray(options.get("exclude"));
+		}
+
+
 		// Read length
 		Integer minReadLength = 2000000000; // I don't think we'll have reads this long soon
 		Integer maxReadLength = 0;
@@ -146,14 +160,34 @@ public class AlignmentFile {
 			}
 		}
 
-		LinkedHashMap<String,Object> result = new LinkedHashMap<String,Object>();
-		result.put("maxReadLength", maxReadLength);
-		result.put("minReadLength", minReadLength);
-		result.put("meanReadLength", totalReadLength / totalReads);
-		result.put("maxQuality", maxQuality);
-		result.put("minQuality", minQuality);
-		result.put("meanQuality", totalQuality / totalReads);
-		result.put("readCount", totalReads);
+		LinkedHashMap<String,Object> tempResult = new LinkedHashMap<String,Object>();
+		tempResult.put("maxReadLength", maxReadLength);
+		tempResult.put("minReadLength", minReadLength);
+		tempResult.put("meanReadLength", totalReadLength / totalReads);
+		tempResult.put("maxQuality", maxQuality);
+		tempResult.put("minQuality", minQuality);
+		tempResult.put("meanQuality", totalQuality / totalReads);
+		tempResult.put("readCount", totalReads);
+
+		LinkedHashMap<String,Object> result = tempResult;
+		if(include.size() > 0) {
+			result = new LinkedHashMap<String,Object>();
+            for (int i = 0; i < include.size(); i++) {
+				String key = include.get(i);
+				if (tempResult.containsKey(key)) {
+					result.put(key, tempResult.get(key));
+				}
+			}
+		}
+
+		if(exclude.size() > 0) {
+            for (int i = 0; i < exclude.size(); i++) {
+				String key = exclude.get(i);
+				if (result.containsKey(key)) {
+					result.remove(key);
+				}
+			}
+		}
 
 		return result;
 	}
