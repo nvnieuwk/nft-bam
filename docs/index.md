@@ -1,6 +1,6 @@
 # nft-bam
 
-nft-bam is an nf-test plugin to make working with SAM, BAM or CRAM files easier. 
+nft-bam is an nf-test plugin to make working with SAM, BAM or CRAM files easier.
 
 ## Start using the plugin
 
@@ -49,5 +49,3 @@ config {
     }
 }
 ```
-
-
