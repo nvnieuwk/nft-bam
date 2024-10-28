@@ -133,6 +133,7 @@ public class AlignmentFile {
 
 		// General stats
 		Integer totalReads = 0;
+		Integer totalDuplicateReads = 0;
 
 		final SAMRecordIterator recordsIterator = fileReader.iterator();
 		while(recordsIterator.hasNext()) {
@@ -147,6 +148,11 @@ public class AlignmentFile {
 			}
 			if (minReadLength > readLength) {
 				minReadLength = readLength;
+			}
+
+			// Duplicate reads statistics
+			if (record.getDuplicateReadFlag()) {
+				totalDuplicateReads++;
 			}
 
 			// Mapping quality statistics
@@ -168,6 +174,7 @@ public class AlignmentFile {
 		tempResult.put("minQuality", minQuality);
 		tempResult.put("meanQuality", totalQuality / totalReads);
 		tempResult.put("readCount", totalReads);
+		tempResult.put("duplicateReadCount", totalDuplicateReads);
 
 		LinkedHashMap<String,Object> result = tempResult;
 		if(include.size() > 0) {
