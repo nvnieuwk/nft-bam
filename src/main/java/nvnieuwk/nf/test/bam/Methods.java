@@ -16,6 +16,10 @@ import java.net.HttpURLConnection;
 import htsjdk.samtools.reference.FastaSequenceIndexCreator;
 
 import software.amazon.awssdk.regions.Region;
+// correct way to use is the defaultCredential provider, it searches for them correctly. (first env, then profile, then instance)
+import software.amazon.awssdk.auth.credentials.AnonymousCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.AwsCredentials;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.core.ResponseInputStream;
@@ -61,8 +65,14 @@ public class Methods {
                 String bucketName = parts[0];
                 String key = parts[1];
 
+				// String accessKey = "";
+				// String secretKey = "";
+				String regionName = "us-east-2";
+				// AwsCredentials credentials = AwsBasicCredentials.create(ac	cessKey, secretKey);
+
                 S3Client s3Client = S3Client.builder()
-                    .region(Region.US_EAST_1) // TODO make it read from config or sys_env
+                    .region(Region.of(regionName)) // TODO make it read from config or sys_env
+					.credentialsProvider(AnonymousCredentialsProvider.create())
                     .build();
 
                 final String dir = System.getProperty("java.io.tmpdir") + "/nft-bam-s3files/";

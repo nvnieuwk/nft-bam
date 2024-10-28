@@ -6,6 +6,21 @@ nextflow_process {
 
     tag "methods"
 
+    test ("raw reads - aws"){
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("s3:/ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/illumina/test.paired_end.sorted.bam", checkIfExists:true)
+                )
+                """
+            }
+        }
+        then {
+            assert snapshot(process.out.bam.collect { bam(it, "s3:/ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/genome/genome.fasta").getReads(11) }).match("raw reads")
+        }
+    }
+
     test("header") {
 
         when {
@@ -27,20 +42,6 @@ nextflow_process {
         }
 
     }
-    // test ("raw reads - aws"){
-    //     when {
-    //         process {
-    //             """
-    //             input[0] = Channel.of(
-    //                 file("s3://nf-core-test-data/bam/test.paired_end.bam", checkIfExists:true),
-    //             )
-    //             """
-    //         }
-    //     }
-    //     then {
-    //         assert snapshot(process.out.bam.collect { bam(it, "s3:/ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/genome/genome.fasta").getReads(11) }).match("raw reads")
-    //     }
-    // }
 
     test("header MD5") {
 
@@ -78,7 +79,7 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { bam(it, "s3:/ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/genome/genome.fasta").getReads(11) }).match("raw reads")
+            assert snapshot(process.out.bam.collect { bam(it, "${baseDir}/tests/genome.fasta").getReads(11) }).match("raw reads")
         }
 
     }
