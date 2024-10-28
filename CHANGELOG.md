@@ -5,13 +5,14 @@
 ### New features
 
 1. Added a new `getStatistics()` method to some general statistics:
-   - `minReadLength`: The lowest read length
-   - `maxReadLength`: The highest read length
-   - `meanReadLength`: The mean read length
-   - `minMappingQuality`: The lowest mapping quality
-   - `maxMappingQuality`: The highest mapping quality
-   - `meanMappingQuality`: The mean mapping quality
-   - `readCount`: The amount of reads present in the file
+    - `minReadLength`: The lowest read length
+    - `maxReadLength`: The highest read length
+    - `meanReadLength`: The mean read length
+    - `minMappingQuality`: The lowest mapping quality
+    - `maxMappingQuality`: The highest mapping quality
+    - `meanMappingQuality`: The mean mapping quality
+    - `readCount`: The amount of reads present in the file
+    - `duplicateReadCount`: The amount of duplicate reads present in the file
 
 ## v0.3.0
 
