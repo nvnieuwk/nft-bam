@@ -15,6 +15,12 @@ import java.net.HttpURLConnection;
 
 import htsjdk.samtools.reference.FastaSequenceIndexCreator;
 
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.core.ResponseInputStream;
+import software.amazon.awssdk.services.s3.model.GetObjectResponse;
+
 public class Methods {
 
 	public static AlignmentFile bam(LinkedHashMap<String,Object> options, CharSequence bamFile, CharSequence reference) throws URISyntaxException, MalformedURLException, IOException {
@@ -44,6 +50,59 @@ public class Methods {
 			} else {
 				createRefIndex(referencePath);
 			}
+
+		} else if(refString.startsWith("s3://") || refString.startsWith("s3:/")) {
+            try {
+                String s3Path = refString.replace("s3://", "").replace("s3:/", "");
+                String[] parts = s3Path.split("/", 2);
+                if (parts.length != 2) {
+                    throw new IllegalArgumentException("Invalid S3 URI format. Expected: s3://bucket-name/key");
+                }
+                String bucketName = parts[0];
+                String key = parts[1];
+
+                S3Client s3Client = S3Client.builder()
+                    .region(Region.US_EAST_1) // TODO make it read from config or sys_env
+                    .build();
+
+                final String dir = System.getProperty("java.io.tmpdir") + "/nft-bam-s3files/";
+                final File dirFile = new File(dir);
+                if (!dirFile.exists()) {
+                    dirFile.mkdirs();
+                }
+
+                // Download reference file
+                String fileName = key.substring(key.lastIndexOf("/") + 1).trim();
+                final String copyRefName = dir + fileName;
+                referencePath = Paths.get(copyRefName);
+
+                // Download the reference file from S3
+                GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(key)
+                    .build();
+
+                ResponseInputStream<GetObjectResponse> s3Object = s3Client.getObject(getObjectRequest);
+                Files.copy(s3Object, referencePath, StandardCopyOption.REPLACE_EXISTING);
+
+                // Try to download the index file if it exists
+                // try {
+                //     String indexKey = key + ".fai";
+                //     GetObjectRequest indexRequest = GetObjectRequest.builder()
+                //         .bucket(bucketName)
+                //         .key(indexKey)
+                //         .build();
+
+                //     ResponseInputStream<GetObjectResponse> indexObject = s3Client.getObject(indexRequest);
+                //     Files.copy(indexObject, Paths.get(copyRefName + ".fai"), StandardCopyOption.REPLACE_EXISTING);
+                // } catch (Exception e) {
+                    // If index file doesn't exist, create it
+                    createRefIndex(referencePath);
+                // }
+
+            } catch (Exception e) {
+                throw new IOException("Failed to download file from S3: " + e.getMessage(), e);
+            }
 		} else if(reference != "") {
 			referencePath = Paths.get(refString);
 			if(!(new File(refString + ".fai").exists())) {
