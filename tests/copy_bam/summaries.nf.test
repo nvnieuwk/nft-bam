@@ -14,7 +14,8 @@ nextflow_process {
                 input[0] = Channel.of(
                     file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
                     file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
-                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.withdup.bam", checkIfExists:true)
                 )
                 """
             }
@@ -35,7 +36,8 @@ nextflow_process {
                 input[0] = Channel.of(
                     file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
                     file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
-                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.withdup.bam", checkIfExists:true)
                 )
                 """
             }
@@ -55,7 +57,8 @@ nextflow_process {
                 input[0] = Channel.of(
                     file("${baseDir}/tests/test.paired_end.bam", checkIfExists:true),
                     file("${baseDir}/tests/test.paired_end.sam", checkIfExists:true),
-                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true)
+                    file("${baseDir}/tests/test.paired_end.cram", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.withdup.bam", checkIfExists:true)
                 )
                 """
             }

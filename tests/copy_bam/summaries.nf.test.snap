@@ -13,14 +13,18 @@
                 {
                     "readCount": 200,
                     "meanReadLength": 138
+                },
+                {
+                    "readCount": 20509,
+                    "meanReadLength": 220
                 }
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.0"
         },
-        "timestamp": "2024-10-01T14:51:09.7991085"
+        "timestamp": "2024-10-28T13:07:52.403830027"
     },
     "statistics - exclude": {
         "content": [
@@ -30,29 +34,40 @@
                     "minReadLength": 53,
                     "maxQuality": 60,
                     "minQuality": 0,
-                    "meanQuality": 57
+                    "meanQuality": 57,
+                    "duplicateReadCount": 0
                 },
                 {
                     "maxReadLength": 151,
                     "minReadLength": 53,
                     "maxQuality": 60,
                     "minQuality": 0,
-                    "meanQuality": 57
+                    "meanQuality": 57,
+                    "duplicateReadCount": 0
                 },
                 {
                     "maxReadLength": 151,
                     "minReadLength": 53,
                     "maxQuality": 60,
                     "minQuality": 0,
-                    "meanQuality": 57
+                    "meanQuality": 57,
+                    "duplicateReadCount": 0
+                },
+                {
+                    "maxReadLength": 251,
+                    "minReadLength": 30,
+                    "maxQuality": 60,
+                    "minQuality": 57,
+                    "meanQuality": 59,
+                    "duplicateReadCount": 348
                 }
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.0"
         },
-        "timestamp": "2024-10-01T14:51:15.827711874"
+        "timestamp": "2024-10-28T13:15:49.812163058"
     },
     "statistics": {
         "content": [
@@ -64,7 +79,8 @@
                     "maxQuality": 60,
                     "minQuality": 0,
                     "meanQuality": 57,
-                    "readCount": 200
+                    "readCount": 200,
+                    "duplicateReadCount": 0
                 },
                 {
                     "maxReadLength": 151,
@@ -73,7 +89,8 @@
                     "maxQuality": 60,
                     "minQuality": 0,
                     "meanQuality": 57,
-                    "readCount": 200
+                    "readCount": 200,
+                    "duplicateReadCount": 0
                 },
                 {
                     "maxReadLength": 151,
@@ -82,14 +99,25 @@
                     "maxQuality": 60,
                     "minQuality": 0,
                     "meanQuality": 57,
-                    "readCount": 200
+                    "readCount": 200,
+                    "duplicateReadCount": 0
+                },
+                {
+                    "maxReadLength": 251,
+                    "minReadLength": 30,
+                    "meanReadLength": 220,
+                    "maxQuality": 60,
+                    "minQuality": 57,
+                    "meanQuality": 59,
+                    "readCount": 20509,
+                    "duplicateReadCount": 348
                 }
             ]
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.0"
         },
-        "timestamp": "2024-10-01T14:51:55.258906425"
+        "timestamp": "2024-10-28T13:15:35.024076147"
     }
 }
