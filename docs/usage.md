@@ -6,7 +6,7 @@ The plugin adds one new function to be able to parse the SAM/BAM/CRAM files corr
 
 The function has one mandatory argument:
 
-- The BAM/CRAM/SAM file used as output of the process/workflow
+-   The BAM/CRAM/SAM file used as output of the process/workflow
 
 ```groovy title="main.nf.test"
 then {
@@ -16,7 +16,7 @@ then {
 
 The function has one optional argument:
 
-- The reference FASTA file. This is necessary for some operations on CRAM files.
+-   The reference FASTA file. This is necessary for some operations on CRAM files.
 
 ```groovy title="main.nf.test"
 then {
@@ -253,7 +253,8 @@ The `.getStatistics()` method returns a Map structure containing several statist
         "maxQuality": 60,
         "minQuality": 0,
         "meanQuality": 57,
-        "readCount": 200
+        "readCount": 200,
+        "duplicateReadCount": 345,
     }
     ```
 
