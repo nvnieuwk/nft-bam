@@ -6,6 +6,21 @@ nextflow_process {
 
     tag "methods"
 
+    test ("raw reads - aws"){
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("s3://ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam", checkIfExists:true)
+                )
+                """
+            }
+        }
+        then {
+            assert snapshot(process.out.bam.collect { bam(it, "s3://ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/genome/genome.fasta").getReads(11) }).match("raw reads - aws")
+        }
+    }
+
     test("header") {
 
         when {
@@ -21,7 +36,7 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { 
+            assert snapshot(process.out.bam.collect {
                 it.endsWith(".cram") ? cram(it).getHeader().findAll { !it.startsWith ("@SQ") } : bam(it).getHeader() // Remove SQ header from cram file due to absolute path for reference
             }).match("header")
         }
@@ -42,7 +57,7 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { 
+            assert snapshot(process.out.bam.collect {
                 bam(it).getHeaderMD5()
             }).match("header MD5")
         }
@@ -104,7 +119,7 @@ nextflow_process {
         }
 
         then {
-            assert snapshot(process.out.bam.collect { 
+            assert snapshot(process.out.bam.collect {
                 bam(it, "https://github.com/nf-core/test-datasets/raw/modules/data/genomics/sarscov2/genome/genome.fasta").getReads(11)
             }).match("raw reads - external reference")
         }

@@ -6,7 +6,7 @@ The plugin adds one new function to be able to parse the SAM/BAM/CRAM files corr
 
 The function has one mandatory argument:
 
--   The BAM/CRAM/SAM file used as output of the process/workflow
+- The BAM/CRAM/SAM file used as output of the process/workflow
 
 ```groovy title="main.nf.test"
 then {
@@ -16,7 +16,7 @@ then {
 
 The function has one optional argument:
 
--   The reference FASTA file. This is necessary for some operations on CRAM files.
+- The reference FASTA file. This is necessary for some operations on CRAM files.
 
 ```groovy title="main.nf.test"
 then {
@@ -280,6 +280,16 @@ Examples:
         bam("test.bam").getStatistics(exclude:["maxReadLength","minReadLength"])
     }
     ```
+
+### Supplying a `s3://` reference
+
+The plugin also supports `s3://` for the reference fasta file. By default `nft-bam` will look at the region `us-east-1` unless specified in the `~/.aws/credentials` file or in [system environment variables](https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-envvars.html). Non-public buckets will need to have the correct permissions set.
+
+```groovy title="main.nf.test"
+then {
+    bam("test.bam", "s3://bucket-name/reference.fasta")
+}
+```
 
 ## Examples
 
