@@ -54,14 +54,14 @@ public class Methods {
 			}
 
 		} else if(refString.startsWith("s3://") || refString.startsWith("s3:/")) {
-            try {
-                String s3Path = refString.replace("s3://", "").replace("s3:/", "");
-                String[] parts = s3Path.split("/", 2);
-                if (parts.length != 2) {
-                    throw new IllegalArgumentException("Invalid S3 URI format. Expected: s3://bucket-name/key");
-                }
-                String bucketName = parts[0];
-                String key = parts[1];
+			try {
+				String s3Path = refString.replace("s3://", "").replace("s3:/", "");
+				String[] parts = s3Path.split("/", 2);
+				if (parts.length != 2) {
+					throw new IllegalArgumentException("Invalid S3 URI format. Expected: s3://bucket-name/key");
+				}
+				String bucketName = parts[0];
+				String key = parts[1];
 
 				Region region;
 				// To improve later on when we find out how we can set it from the nextflow.config
@@ -77,30 +77,30 @@ public class Methods {
 				// }
 				S3Client s3Client = Utils.createS3Client(region);
 
-                final String dir = System.getProperty("java.io.tmpdir") + "/nft-bam-s3files/";
-                final File dirFile = new File(dir);
-                if (!dirFile.exists()) {
-                    dirFile.mkdirs();
-                }
+				final String dir = System.getProperty("java.io.tmpdir") + "/nft-bam-s3files/";
+				final File dirFile = new File(dir);
+				if (!dirFile.exists()) {
+					dirFile.mkdirs();
+				}
 
-                String fileName = key.substring(key.lastIndexOf("/") + 1).trim();
-                final String copyRefName = dir + fileName;
-                referencePath = Paths.get(copyRefName);
+				String fileName = key.substring(key.lastIndexOf("/") + 1).trim();
+				final String copyRefName = dir + fileName;
+				referencePath = Paths.get(copyRefName);
 
-                // Download the reference file from S3
-                GetObjectRequest getObjectRequest = GetObjectRequest.builder()
-                    .bucket(bucketName)
-                    .key(key)
-                    .build();
+				// Download the reference file from S3
+				GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+					.bucket(bucketName)
+					.key(key)
+					.build();
 
-                ResponseInputStream<GetObjectResponse> s3Object = s3Client.getObject(getObjectRequest);
-                Files.copy(s3Object, referencePath, StandardCopyOption.REPLACE_EXISTING);
+				ResponseInputStream<GetObjectResponse> s3Object = s3Client.getObject(getObjectRequest);
+				Files.copy(s3Object, referencePath, StandardCopyOption.REPLACE_EXISTING);
 
-                createRefIndex(referencePath);
+				createRefIndex(referencePath);
 
-            } catch (Exception e) {
-                throw new IOException("Failed to download file from S3: \n" + e.getMessage(), e);
-            }
+			} catch (Exception e) {
+				throw new IOException("Failed to download file from S3: \n" + e.getMessage(), e);
+			}
 		} else if(reference != "") {
 			referencePath = Paths.get(refString);
 			if(!(new File(refString + ".fai").exists())) {

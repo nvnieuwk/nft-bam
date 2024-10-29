@@ -10,39 +10,39 @@ import software.amazon.awssdk.services.s3.S3Client;
 
 
 public class Utils {
-    public static ArrayList<String> castToStringArray(Object input) {
-        ArrayList<String> result = new ArrayList<String>();
-        if (input instanceof ArrayList<?>) {
-            ArrayList<?> inputArray = (ArrayList<?>)input;
-            for (int i = 0; i < inputArray.size(); i++) {
-                Object item = inputArray.get(i);
-                if(item instanceof String) {
-                    result.add((String)item);
-                }
-            }
-        }
-        return result;
-    }
+	public static ArrayList<String> castToStringArray(Object input) {
+		ArrayList<String> result = new ArrayList<String>();
+		if (input instanceof ArrayList<?>) {
+			ArrayList<?> inputArray = (ArrayList<?>)input;
+			for (int i = 0; i < inputArray.size(); i++) {
+				Object item = inputArray.get(i);
+				if(item instanceof String) {
+					result.add((String)item);
+				}
+			}
+		}
+		return result;
+	}
 
-    /**
-     * Creates an S3 client with a specified region, using AWS's default credentials provider chain.
-     * Falls back to anonymous access if no credentials are found.
-     *
-     * @param region the AWS region to use
-     * @return configured S3Client instance
-     */
-    // create a custom chain that includes the default one and a Anonynoums
-    public static S3Client createS3Client(Region region) {
+	/**
+	 * Creates an S3 client with a specified region, using AWS's default credentials provider chain.
+	 * Falls back to anonymous access if no credentials are found.
+	 *
+	 * @param region the AWS region to use
+	 * @return configured S3Client instance
+	 */
+	// create a custom chain that includes the default one and a Anonynoums
+	public static S3Client createS3Client(Region region) {
 
-        AwsCredentialsProviderChain credentialsChain = AwsCredentialsProviderChain.of(
-            DefaultCredentialsProvider.create(),
-            AnonymousCredentialsProvider.create()
-        );
+		AwsCredentialsProviderChain credentialsChain = AwsCredentialsProviderChain.of(
+			DefaultCredentialsProvider.create(),
+			AnonymousCredentialsProvider.create()
+		);
 
-        return S3Client.builder()
-            .region(region)
-            .credentialsProvider(credentialsChain)
-            .build();
-    }
+		return S3Client.builder()
+			.region(region)
+			.credentialsProvider(credentialsChain)
+			.build();
+	}
 }
 
