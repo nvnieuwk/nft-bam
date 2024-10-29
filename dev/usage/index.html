@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.8c3ca2c6.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -407,6 +407,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#supplying-a-s3-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supplying a s3:// reference
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -532,6 +541,15 @@
   <a href="#getstatistics-method" class="md-nav__link">
     <span class="md-ellipsis">
       .getStatistics() method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supplying-a-s3-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supplying a s3:// reference
     </span>
   </a>
   
@@ -793,8 +811,9 @@
 </span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">    </span><span class="s2">&quot;maxQuality&quot;</span><span class="o">:</span><span class="w"> </span><span class="mi">60</span><span class="o">,</span>
 </span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="s2">&quot;minQuality&quot;</span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="o">,</span>
 </span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">    </span><span class="s2">&quot;meanQuality&quot;</span><span class="o">:</span><span class="w"> </span><span class="mi">57</span><span class="o">,</span>
-</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">    </span><span class="s2">&quot;readCount&quot;</span><span class="o">:</span><span class="w"> </span><span class="mi">200</span>
-</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="o">}</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">    </span><span class="s2">&quot;readCount&quot;</span><span class="o">:</span><span class="w"> </span><span class="mi">200</span><span class="o">,</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="w">    </span><span class="s2">&quot;duplicateReadCount&quot;</span><span class="o">:</span><span class="w"> </span><span class="mi">345</span><span class="o">,</span>
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="o">}</span>
 </span></code></pre></div>
 </div>
 </div>
@@ -821,6 +840,12 @@
 </div>
 </div>
 </div>
+<h3 id="supplying-a-s3-reference">Supplying a <code>s3://</code> reference</h3>
+<p>The plugin also supports <code>s3://</code> for the reference fasta file. By default <code>nft-bam</code> will look at the region <code>us-east-1</code> unless specified in the <code>~/.aws/credentials</code> file or in <a href="https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-envvars.html">system environment variables</a>. Non-public buckets will need to have the correct permissions set.</p>
+<div class="language-groovy highlight"><span class="filename">main.nf.test</span><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;test.bam&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;s3://bucket-name/reference.fasta&quot;</span><span class="o">)</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="o">}</span>
+</span></code></pre></div>
 <h2 id="examples">Examples</h2>
 <p>Have a look at the <a href="https://github.com/nvnieuwk/nft-bam/tree/main/tests/copy_bam">plugin tests</a> to see some example implementations.</p>
 
@@ -902,7 +927,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.code.copy", "navigation.instant", "navigation.top", "navigation.tracking", "navigation.sections", "navigation.footer", "search.share", "toc.follow"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.525ec568.min.js"></script>
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
   </body>
