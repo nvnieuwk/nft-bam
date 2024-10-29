@@ -283,7 +283,7 @@ Examples:
 
 ### Supplying a `s3://` reference
 
-The plugin also supports `s3://` references for the reference fasta file. This can be used to download the reference fasta file from an S3 bucket. By default it will look at `us-east-1` as the region, for non-public buckets specify the region & credentials in the `~/.aws/credentials` file or in [system environment variables](https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-envvars.html).
+The plugin also supports `s3://` for the reference fasta file. By default `nft-bam` will look at the region `us-east-1` unless specified in the `~/.aws/credentials` file or in [system environment variables](https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-envvars.html). Non-public buckets will need to have the correct permissions set.
 
 ```groovy title="main.nf.test"
 then {
