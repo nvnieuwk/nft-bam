@@ -71,7 +71,7 @@ public class Methods {
 				try {
 					region = new DefaultAwsRegionProviderChain().getRegion();
 				} catch (SdkClientException e) {
-					System.out.println("\n \u001B[33m WARNING: Failed to get the bucket region defaulting to us-east-1. \n" + e.getMessage() + "\u001B[0m");
+					System.out.println("\n \u001B[33m WARNING: Failed to get the bucket region of " + refString + " defaulting to us-east-1. \n" + e.getMessage() + "\u001B[0m");
 					region = Region.US_EAST_1;
 				}
 				// }

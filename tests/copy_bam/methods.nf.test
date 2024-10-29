@@ -17,7 +17,7 @@ nextflow_process {
             }
         }
         then {
-            assert snapshot(process.out.bam.collect { bam(it, "s3://ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/genome/genome.fasta").getReads(11) }).match("raw reads")
+            assert snapshot(process.out.bam.collect { bam(it, "s3://ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/genome/genome.fasta").getReads(11) }).match("raw reads - aws")
         }
     }
 
