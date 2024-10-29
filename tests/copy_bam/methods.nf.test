@@ -11,13 +11,13 @@ nextflow_process {
             process {
                 """
                 input[0] = Channel.of(
-                    file("s3:/ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/illumina/test.paired_end.sorted.bam", checkIfExists:true)
+                    file("s3://ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam", checkIfExists:true)
                 )
                 """
             }
         }
         then {
-            assert snapshot(process.out.bam.collect { bam(it, "s3:/ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/genome/genome.fasta").getReads(11) }).match("raw reads")
+            assert snapshot(process.out.bam.collect { bam(it, "s3://ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/genome/genome.fasta").getReads(11) }).match("raw reads")
         }
     }
 

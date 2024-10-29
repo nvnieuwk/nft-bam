@@ -16,13 +16,11 @@ import java.net.HttpURLConnection;
 import htsjdk.samtools.reference.FastaSequenceIndexCreator;
 
 import software.amazon.awssdk.regions.Region;
-// correct way to use is the defaultCredential provider, it searches for them correctly. (first env, then profile, then instance)
-import software.amazon.awssdk.auth.credentials.AnonymousCredentialsProvider;
-import software.amazon.awssdk.auth.credentials.AwsCredentials;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.regions.providers.DefaultAwsRegionProviderChain;
+import software.amazon.awssdk.core.exception.SdkClientException;
+import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
-import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 
 public class Methods {
@@ -65,15 +63,19 @@ public class Methods {
                 String bucketName = parts[0];
                 String key = parts[1];
 
-				// String accessKey = "";
-				// String secretKey = "";
-				String regionName = "us-east-2";
-				// AwsCredentials credentials = AwsBasicCredentials.create(ac	cessKey, secretKey);
-
-                S3Client s3Client = S3Client.builder()
-                    .region(Region.of(regionName)) // TODO make it read from config or sys_env
-					.credentialsProvider(AnonymousCredentialsProvider.create())
-                    .build();
+				Region region;
+				// To improve later on when we find out how we can set it from the nextflow.config
+				// if is.set(params.aws_region) {
+				//	region = Region.of(params.aws_region)
+				// } else {
+				try {
+					region = new DefaultAwsRegionProviderChain().getRegion();
+				} catch (SdkClientException e) {
+					System.out.println("\n \u001B[33m WARNING: Failed to get the bucket region defaulting to us-east-1. \n" + e.getMessage() + "\u001B[0m");
+					region = Region.US_EAST_1;
+				}
+				// }
+				S3Client s3Client = Utils.createS3Client(region);
 
                 final String dir = System.getProperty("java.io.tmpdir") + "/nft-bam-s3files/";
                 final File dirFile = new File(dir);
@@ -81,7 +83,6 @@ public class Methods {
                     dirFile.mkdirs();
                 }
 
-                // Download reference file
                 String fileName = key.substring(key.lastIndexOf("/") + 1).trim();
                 final String copyRefName = dir + fileName;
                 referencePath = Paths.get(copyRefName);
@@ -95,23 +96,10 @@ public class Methods {
                 ResponseInputStream<GetObjectResponse> s3Object = s3Client.getObject(getObjectRequest);
                 Files.copy(s3Object, referencePath, StandardCopyOption.REPLACE_EXISTING);
 
-                // Try to download the index file if it exists
-                // try {
-                //     String indexKey = key + ".fai";
-                //     GetObjectRequest indexRequest = GetObjectRequest.builder()
-                //         .bucket(bucketName)
-                //         .key(indexKey)
-                //         .build();
-
-                //     ResponseInputStream<GetObjectResponse> indexObject = s3Client.getObject(indexRequest);
-                //     Files.copy(indexObject, Paths.get(copyRefName + ".fai"), StandardCopyOption.REPLACE_EXISTING);
-                // } catch (Exception e) {
-                    // If index file doesn't exist, create it
-                    createRefIndex(referencePath);
-                // }
+                createRefIndex(referencePath);
 
             } catch (Exception e) {
-                throw new IOException("Failed to download file from S3: " + e.getMessage(), e);
+                throw new IOException("Failed to download file from S3: \n" + e.getMessage(), e);
             }
 		} else if(reference != "") {
 			referencePath = Paths.get(refString);
