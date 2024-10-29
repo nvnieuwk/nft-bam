@@ -53,7 +53,7 @@ public class Methods {
 				createRefIndex(referencePath);
 			}
 
-		} else if(refString.startsWith("s3://") || refString.startsWith("s3:/")) {
+		} else if(refString.startsWith("s3:/")) {
 			try {
 				String s3Path = refString.replace("s3://", "").replace("s3:/", "");
 				String[] parts = s3Path.split("/", 2);
