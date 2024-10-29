@@ -407,6 +407,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#supplying-a-s3-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supplying a s3:// reference
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -532,6 +541,15 @@
   <a href="#getstatistics-method" class="md-nav__link">
     <span class="md-ellipsis">
       .getStatistics() method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supplying-a-s3-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supplying a s3:// reference
     </span>
   </a>
   
@@ -822,6 +840,12 @@
 </div>
 </div>
 </div>
+<h3 id="supplying-a-s3-reference">Supplying a <code>s3://</code> reference</h3>
+<p>The plugin also supports <code>s3://</code> for the reference fasta file. By default <code>nft-bam</code> will look at the region <code>us-east-1</code> unless specified in the <code>~/.aws/credentials</code> file or in <a href="https://docs.aws.amazon.com/cli/v1/userguide/cli-configure-envvars.html">system environment variables</a>. Non-public buckets will need to have the correct permissions set.</p>
+<div class="language-groovy highlight"><span class="filename">main.nf.test</span><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;test.bam&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;s3://bucket-name/reference.fasta&quot;</span><span class="o">)</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="o">}</span>
+</span></code></pre></div>
 <h2 id="examples">Examples</h2>
 <p>Have a look at the <a href="https://github.com/nvnieuwk/nft-bam/tree/main/tests/copy_bam">plugin tests</a> to see some example implementations.</p>
 
