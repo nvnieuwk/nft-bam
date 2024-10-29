@@ -1,4 +1,4 @@
 moduleName=nft-bam
-moduleVersion=0.5.0
+moduleVersion=0.6.0dev
 moduleAuthors=Nicolas Vannieuwkerke
 extensionMethods=nvnieuwk.nf.test.bam.Methods
