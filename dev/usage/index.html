@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.43">
     
     
       
@@ -326,13 +326,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bam-function" class="md-nav__link">
+  <a href="#bam-sam-cram-function" class="md-nav__link">
     <span class="md-ellipsis">
-      bam() function
+      bam() / sam() / cram() function
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="bam() function">
+    <nav class="md-nav" aria-label="bam() / sam() / cram() function">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -465,13 +465,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bam-function" class="md-nav__link">
+  <a href="#bam-sam-cram-function" class="md-nav__link">
     <span class="md-ellipsis">
-      bam() function
+      bam() / sam() / cram() function
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="bam() function">
+    <nav class="md-nav" aria-label="bam() / sam() / cram() function">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -588,8 +588,8 @@
 
 
 <h1 id="usage">Usage</h1>
-<p>The plugin adds one new function to be able to parse the SAM/BAM/CRAM files correctly. This function is called <code>bam()</code>.</p>
-<h2 id="bam-function"><code>bam()</code> function</h2>
+<p>The plugin adds one new function to be able to parse the SAM/BAM/CRAM files correctly. This function is called <code>bam()</code>, but can also be called with aliases <code>sam()</code> and <code>cram()</code>.</p>
+<h2 id="bam-sam-cram-function"><code>bam()</code> / <code>sam()</code> / <code>cram()</code> function</h2>
 <p>The function has one mandatory argument:</p>
 <ul>
 <li>The BAM/CRAM/SAM file used as output of the process/workflow</li>
@@ -603,11 +603,10 @@
 <li>The reference FASTA file. This is necessary for some operations on CRAM files.</li>
 </ul>
 <div class="language-groovy highlight"><span class="filename">main.nf.test</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;&lt;SAM/BAM/CRAM&gt;&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;&lt;reference_fasta&gt;&quot;</span><span class="o">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">cram</span><span class="o">(</span><span class="s2">&quot;&lt;SAM/BAM/CRAM&gt;&quot;</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;&lt;reference_fasta&gt;&quot;</span><span class="o">)</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="o">}</span>
 </span></code></pre></div>
 <p>The fasta can either be a local file or a file URL (currently only supports HTTP and HTTPS protocols)</p>
-<p>The function can also be called as <code>sam()</code> or <code>cram()</code>. These are simply aliases of the <code>bam()</code> function and will do exactly the same thing.</p>
 <p>Additionally, the <code>stringency</code> option can also be used to set the validation stringency of the HTSJDK library. This can be used to silence the validation errors emitted when an alignment file isn't correct. This options accepts 3 possible values: <code>lenient</code>, <code>silent</code> and <code>strict</code>(default).</p>
 <div class="language-groovy highlight"><span class="filename">main.nf.test</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">then</span><span class="o">(</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;&lt;SAM/BAM/CRAM&gt;&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">stringency:</span><span class="w"> </span><span class="s2">&quot;lenient&quot;</span><span class="o">)</span>
@@ -642,7 +641,7 @@
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-groovy highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;...&quot;</span><span class="o">).</span><span class="na">getHeaderMD5</span><span class="o">()</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">sam</span><span class="o">(</span><span class="s2">&quot;...&quot;</span><span class="o">).</span><span class="na">getHeaderMD5</span><span class="o">()</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="o">}</span>
 </span></code></pre></div>
 </div>
@@ -727,7 +726,7 @@
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-groovy highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;...&quot;</span><span class="o">).</span><span class="na">getSamLines</span><span class="o">()</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="n">sam</span><span class="o">(</span><span class="s2">&quot;...&quot;</span><span class="o">).</span><span class="na">getSamLines</span><span class="o">()</span>
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="o">}</span>
 </span></code></pre></div>
 </div>
@@ -748,7 +747,7 @@
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-groovy highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;...&quot;</span><span class="o">).</span><span class="na">getSamLines</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="n">sam</span><span class="o">(</span><span class="s2">&quot;...&quot;</span><span class="o">).</span><span class="na">getSamLines</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="o">}</span>
 </span></code></pre></div>
 </div>
@@ -767,7 +766,7 @@
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-groovy highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="n">bam</span><span class="o">(</span><span class="s2">&quot;...&quot;</span><span class="o">).</span><span class="na">getSamLinesMD5</span><span class="o">()</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="n">sam</span><span class="o">(</span><span class="s2">&quot;...&quot;</span><span class="o">).</span><span class="na">getSamLinesMD5</span><span class="o">()</span>
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="o">}</span>
 </span></code></pre></div>
 </div>
