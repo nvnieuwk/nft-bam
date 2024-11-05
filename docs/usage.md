@@ -1,8 +1,8 @@
 # Usage
 
-The plugin adds one new function to be able to parse the SAM/BAM/CRAM files correctly. This function is called `bam()`.
+The plugin adds one new function to be able to parse the SAM/BAM/CRAM files correctly. This function is called `bam()`, but can also be called with aliases `sam()` and `cram()`.
 
-## `bam()` function
+## `bam()` / `sam()` / `cram()` function
 
 The function has one mandatory argument:
 
@@ -20,13 +20,11 @@ The function has one optional argument:
 
 ```groovy title="main.nf.test"
 then {
-    bam("<SAM/BAM/CRAM>", "<reference_fasta>")
+    cram("<SAM/BAM/CRAM>", "<reference_fasta>")
 }
 ```
 
 The fasta can either be a local file or a file URL (currently only supports HTTP and HTTPS protocols)
-
-The function can also be called as `sam()` or `cram()`. These are simply aliases of the `bam()` function and will do exactly the same thing.
 
 Additionally, the `stringency` option can also be used to set the validation stringency of the HTSJDK library. This can be used to silence the validation errors emitted when an alignment file isn't correct. This options accepts 3 possible values: `lenient`, `silent` and `strict`(default).
 
@@ -70,7 +68,7 @@ The `.getHeaderMD5()` method returns the MD5 checksum of the header:
 
     ```groovy
     then {
-        bam("...").getHeaderMD5()
+        sam("...").getHeaderMD5()
     }
     ```
 
@@ -160,7 +158,7 @@ The `.getSamLines()` method returns a list of all lines from the alignment file:
 
     ```groovy
     then {
-        bam("...").getSamLines()
+        sam("...").getSamLines()
     }
     ```
 
@@ -182,7 +180,7 @@ You can also supply an integer to the function to limit the amount of lines the 
 
     ```groovy
     then {
-        bam("...").getSamLines(2)
+        sam("...").getSamLines(2)
     }
     ```
 
@@ -203,7 +201,7 @@ The `.getSamLinesMD5()` method returns the MD5 checksum of the plain SAM lines:
 
     ```groovy
     then {
-        bam("...").getSamLinesMD5()
+        sam("...").getSamLinesMD5()
     }
     ```
 
