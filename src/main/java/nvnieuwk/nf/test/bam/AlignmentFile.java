@@ -135,10 +135,23 @@ public class AlignmentFile {
 		Integer totalReads = 0;
 		Integer totalDuplicateReads = 0;
 
+		// Sorted check
+		Boolean sorted = true;
+		Integer lastStartPosition = 0;
+
 		final SAMRecordIterator recordsIterator = fileReader.iterator();
 		while(recordsIterator.hasNext()) {
 			totalReads++;
 			SAMRecord record = recordsIterator.next();
+
+			// Check sorted
+			if (sorted) {
+				Integer startPosition = record.getStart();
+				if (startPosition < lastStartPosition) {
+					sorted = false;
+				}
+				lastStartPosition = startPosition;
+			}
 
 			// Read length statistics
 			Integer readLength = record.getReadLength();
@@ -175,6 +188,7 @@ public class AlignmentFile {
 		tempResult.put("meanQuality", totalQuality / totalReads);
 		tempResult.put("readCount", totalReads);
 		tempResult.put("duplicateReadCount", totalDuplicateReads);
+		tempResult.put("sorted", sorted);
 
 		LinkedHashMap<String,Object> result = tempResult;
 		if(include.size() > 0) {
