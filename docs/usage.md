@@ -253,6 +253,7 @@ The `.getStatistics()` method returns a Map structure containing several statist
         "meanQuality": 57,
         "readCount": 200,
         "duplicateReadCount": 345,
+        "sorted": false
     }
     ```
 

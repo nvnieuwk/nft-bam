@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.0dev
+
+### New features
+
+1. Added `sorted` to the output of `getStatistics()` that shows whether the file is sorted or not
+
 ## v0.5.0
 
 Special shoutout to [@Joon-Klaps](https://github.com/Joon-Klaps) for adding all new features in this release!
