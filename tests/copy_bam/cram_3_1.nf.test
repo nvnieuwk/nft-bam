@@ -1,0 +1,24 @@
+nextflow_process {
+
+    name "Test Process COPY_BAM"
+    script "./main.nf"
+    process "COPY_BAM"
+
+    tag "cram_3_1"
+
+    test ("cram v3.1"){
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/cram_3.1.cram", checkIfExists:true)
+                )
+                """
+            }
+        }
+        then {
+            assert snapshot(process.out.bam.collect { cram(it, "s3://ngi-igenomes/testdata/nf-core/modules/genomics/homo_sapiens/genome/genome.fasta").getStatistics() }).match()
+        }
+    }
+
+}

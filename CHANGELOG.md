@@ -1,6 +1,12 @@
 # Changelog
 
-## v0.6.0dev
+## v0.6.1
+
+### Fixes
+
+1. Bumped the `htsjdk` dependency to 4.2.0 to add support for CRAM v3.1 files
+
+## v0.6.0
 
 ### New features
 
