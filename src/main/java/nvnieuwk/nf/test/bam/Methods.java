@@ -160,4 +160,12 @@ public class Methods {
 		FastaSequenceIndexCreator.create(fasta, true);
 	}
 
+	public static IndexFile bai(CharSequence index) throws IOException {
+		return new IndexFile(index);
+	}
+
+	public static IndexFile crai(CharSequence index) throws IOException {
+		return new IndexFile(index);
+	}
+
 }

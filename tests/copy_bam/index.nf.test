@@ -1,0 +1,28 @@
+nextflow_process {
+
+    name "Test Process COPY_INDEX"
+    script "./main.nf"
+    process "COPY_INDEX"
+
+    tag "index"
+
+    test("index type") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    file("${baseDir}/tests/test.paired_end.sorted.bam.bai", checkIfExists:true),
+                    file("${baseDir}/tests/test.paired_end.cram.crai", checkIfExists:true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert snapshot(process.out.index.collect { bai(it.toString()).getIndexType() }).match()
+        }
+
+    }
+
+}
