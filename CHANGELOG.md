@@ -6,6 +6,10 @@
 
 1. Added `sorted` to the output of `getStatistics()` that shows whether the file is sorted or not
 
+### Changes
+
+1. Updated the htsjdk dependency to version 4.3.0, allowing CRAM 3.1 files to be tested.
+
 ## v0.5.0
 
 Special shoutout to [@Joon-Klaps](https://github.com/Joon-Klaps) for adding all new features in this release!
