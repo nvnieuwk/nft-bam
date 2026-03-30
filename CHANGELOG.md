@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.6.0dev
+## v0.6.0
 
 ### New features
 
