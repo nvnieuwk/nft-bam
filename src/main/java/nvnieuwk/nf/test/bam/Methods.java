@@ -46,11 +46,12 @@ public class Methods {
 			final HttpURLConnection hucFai = (HttpURLConnection) new URL(indexStringFai).openConnection();
 			String indexStringGzi = refString + ".gzi";
 			final HttpURLConnection hucGzi = (HttpURLConnection) new URL(indexStringGzi).openConnection();
-			if(hucFai.getResponseCode() == 200) {
-				copyUrl(indexStringFai, dir);
-			} else if (refString.endsWith(".gz") && hucGzi.getResponseCode() == 200) {
+			if (refString.endsWith(".gz") && hucGzi.getResponseCode() == 200) {
 				copyUrl(indexStringGzi, dir);
-			} else {
+			} else if(hucFai.getResponseCode() == 200) {
+				copyUrl(indexStringFai, dir);
+			}
+			else {
 				createRefIndex(referencePath);
 			}
 

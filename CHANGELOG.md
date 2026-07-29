@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0
+
+1. Bumped htsjkd to 5.0.0
+2. Added a pixi environment to ease development
+3. Pick the `.gzi` reference index whenever the fasta reference is compressed (`.gz`)
+
 ## v0.6.1
 
 ### Changes
