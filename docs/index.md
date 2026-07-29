@@ -49,3 +49,11 @@ config {
     }
 }
 ```
+
+## Contributing
+
+The repository contains a [pixi](https://pixi.prefix.dev/latest/) environment. Run the following command after installing pixi to start developing the plugin:
+
+```
+pixi shell
+```

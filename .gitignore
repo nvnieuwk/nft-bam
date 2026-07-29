@@ -29,4 +29,6 @@ hs_err_pid*
 /.nf-test/
 
 # generated test data
-tests/no_index.fasta.fai
+tests/no_index.fasta.fai# pixi environments
+.pixi/*
+!.pixi/config.toml
