@@ -42,13 +42,14 @@ public class Methods {
 			referencePath = Paths.get(copyRefName);
 
 			// Handle index fetching or creation
-			final String indexString = refString + ".fai";
-			final URL indexUrl = new URL(indexString);
-			final HttpURLConnection huc = (HttpURLConnection) indexUrl.openConnection();
-			if(huc.getResponseCode() == 200) {
-				InputStream indexStream = new URL(indexString).openStream();
-				final String copyIndexName = dir + indexString.substring(indexString.lastIndexOf("/") + 1).trim();
-				Files.copy(indexStream, Paths.get(copyIndexName), StandardCopyOption.REPLACE_EXISTING);
+			String indexStringFai = refString + ".fai";
+			final HttpURLConnection hucFai = (HttpURLConnection) new URL(indexStringFai).openConnection();
+			String indexStringGzi = refString + ".gzi";
+			final HttpURLConnection hucGzi = (HttpURLConnection) new URL(indexStringGzi).openConnection();
+			if(hucFai.getResponseCode() == 200) {
+				copyUrl(indexStringFai, dir);
+			} else if (refString.endsWith(".gz") && hucGzi.getResponseCode() == 200) {
+				copyUrl(indexStringGzi, dir);
 			} else {
 				createRefIndex(referencePath);
 			}
@@ -158,6 +159,12 @@ public class Methods {
 
 	private static void createRefIndex(Path fasta) throws IOException {
 		FastaSequenceIndexCreator.create(fasta, true);
+	}
+
+	private static void copyUrl(String urlString, String directory) throws IOException {
+		InputStream indexStream = new URL(urlString).openStream();
+		final String copyIndexName = directory + urlString.substring(urlString.lastIndexOf("/") + 1).trim();
+		Files.copy(indexStream, Paths.get(copyIndexName), StandardCopyOption.REPLACE_EXISTING);
 	}
 
 }
