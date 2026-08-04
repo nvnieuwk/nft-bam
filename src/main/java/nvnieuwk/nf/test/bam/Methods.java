@@ -14,6 +14,7 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 
 import htsjdk.samtools.reference.FastaSequenceIndexCreator;
+import htsjdk.samtools.util.GZIIndex;
 
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.regions.providers.DefaultAwsRegionProviderChain;
@@ -43,15 +44,16 @@ public class Methods {
 
 			// Handle index fetching or creation
 			String indexStringFai = refString + ".fai";
-			final HttpURLConnection hucFai = (HttpURLConnection) new URL(indexStringFai).openConnection();
+			final boolean faiExists = ((HttpURLConnection) new URL(indexStringFai).openConnection()).getResponseCode() == 200;
 			String indexStringGzi = refString + ".gzi";
-			final HttpURLConnection hucGzi = (HttpURLConnection) new URL(indexStringGzi).openConnection();
-			if (refString.endsWith(".gz") && hucGzi.getResponseCode() == 200) {
+			final boolean gziExists = ((HttpURLConnection) new URL(indexStringGzi).openConnection()).getResponseCode() == 200;
+			if (gziExists) {
 				copyUrl(indexStringGzi, dir);
-			} else if(hucFai.getResponseCode() == 200) {
+			} 
+			if(faiExists) {
 				copyUrl(indexStringFai, dir);
 			}
-			else {
+			if(!faiExists || !gziExists) {
 				createRefIndex(referencePath);
 			}
 
@@ -105,7 +107,10 @@ public class Methods {
 			}
 		} else if(reference != "") {
 			referencePath = Paths.get(refString);
-			if(!(new File(refString + ".fai").exists())) {
+			if(
+				(refString.endsWith(".gz") && !(new File(refString + ".gzi").exists())) ||
+				!(new File(refString + ".fai").exists())
+			) {
 				createRefIndex(referencePath);
 			}
 		} else {
@@ -160,6 +165,9 @@ public class Methods {
 
 	private static void createRefIndex(Path fasta) throws IOException {
 		FastaSequenceIndexCreator.create(fasta, true);
+		if (fasta.toString().endsWith(".gz")) {
+			GZIIndex.createIndex(fasta, false);
+		}
 	}
 
 	private static void copyUrl(String urlString, String directory) throws IOException {

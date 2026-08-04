@@ -30,6 +30,8 @@ hs_err_pid*
 
 # generated test data
 tests/no_index.fasta.fai
+tests/no_index.fasta.gz.fai
+tests/no_index.fasta.gz.gzi
 
 # pixi environments
 .pixi/*
