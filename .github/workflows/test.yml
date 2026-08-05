@@ -25,7 +25,10 @@ jobs:
         uses: nf-core/setup-nextflow@v2
 
       - name: Install nf-test
-        uses: nf-core/setup-nf-test@v1
+        uses: nf-core/setup-nf-test@4069fbbaabe94c08faba4ad261bfa88225ba133f
+        with:
+          version: "0.9.5"
+          install-pdiff: true
 
       - name: Build plugin
         run: ./build.sh

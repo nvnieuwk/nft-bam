@@ -14,6 +14,7 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 
 import htsjdk.samtools.reference.FastaSequenceIndexCreator;
+import htsjdk.samtools.util.GZIIndex;
 
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.regions.providers.DefaultAwsRegionProviderChain;
@@ -42,14 +43,17 @@ public class Methods {
 			referencePath = Paths.get(copyRefName);
 
 			// Handle index fetching or creation
-			final String indexString = refString + ".fai";
-			final URL indexUrl = new URL(indexString);
-			final HttpURLConnection huc = (HttpURLConnection) indexUrl.openConnection();
-			if(huc.getResponseCode() == 200) {
-				InputStream indexStream = new URL(indexString).openStream();
-				final String copyIndexName = dir + indexString.substring(indexString.lastIndexOf("/") + 1).trim();
-				Files.copy(indexStream, Paths.get(copyIndexName), StandardCopyOption.REPLACE_EXISTING);
-			} else {
+			String indexStringFai = refString + ".fai";
+			final boolean faiExists = ((HttpURLConnection) new URL(indexStringFai).openConnection()).getResponseCode() == 200;
+			String indexStringGzi = refString + ".gzi";
+			final boolean gziExists = ((HttpURLConnection) new URL(indexStringGzi).openConnection()).getResponseCode() == 200;
+			if (gziExists) {
+				copyUrl(indexStringGzi, dir);
+			} 
+			if(faiExists) {
+				copyUrl(indexStringFai, dir);
+			}
+			if(!faiExists || !gziExists) {
 				createRefIndex(referencePath);
 			}
 
@@ -103,7 +107,10 @@ public class Methods {
 			}
 		} else if(reference != "") {
 			referencePath = Paths.get(refString);
-			if(!(new File(refString + ".fai").exists())) {
+			if(
+				(refString.endsWith(".gz") && !(new File(refString + ".gzi").exists())) ||
+				!(new File(refString + ".fai").exists())
+			) {
 				createRefIndex(referencePath);
 			}
 		} else {
@@ -158,6 +165,15 @@ public class Methods {
 
 	private static void createRefIndex(Path fasta) throws IOException {
 		FastaSequenceIndexCreator.create(fasta, true);
+		if (fasta.toString().endsWith(".gz")) {
+			GZIIndex.createIndex(fasta, false);
+		}
+	}
+
+	private static void copyUrl(String urlString, String directory) throws IOException {
+		InputStream indexStream = new URL(urlString).openStream();
+		final String copyIndexName = directory + urlString.substring(urlString.lastIndexOf("/") + 1).trim();
+		Files.copy(indexStream, Paths.get(copyIndexName), StandardCopyOption.REPLACE_EXISTING);
 	}
 
 }

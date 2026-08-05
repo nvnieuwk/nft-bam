@@ -9,7 +9,7 @@ To start using the plugin please add it to your `nf-test.config` file:
 ```groovy title="nf-test.config"
 config {
     plugins {
-        load "nft-bam@0.6.1"
+        load "nft-bam@0.7.0"
     }
 }
 ```
@@ -48,4 +48,12 @@ config {
         loadFromFile "full/path/to/the/plugin/jar"
     }
 }
+```
+
+## Contributing
+
+The repository contains a [pixi](https://pixi.prefix.dev/latest/) environment. Run the following command after installing pixi to start developing the plugin:
+
+```
+pixi shell
 ```
