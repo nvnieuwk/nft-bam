@@ -4,7 +4,7 @@
   <groupId>com.nvnieuwk</groupId>
   <artifactId>nft-bam</artifactId>
   <name>nft-bam</name>
-  <version>0.6.0</version>
+  <version>0.7.0</version>
   <description>nf-test plugin to support SAM/BAM/CRAM formats</description>
   <url>https://github.com/nvnieuwk/nft-bam</url>
   <licenses>
@@ -40,7 +40,7 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <htsjdk.version>3.0.5</htsjdk.version>
+    <htsjdk.version>5.0.0</htsjdk.version>
     <additionalparam>-Xdoclint:none</additionalparam>
   </properties>
 </project>

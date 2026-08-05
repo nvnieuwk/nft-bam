@@ -1,0 +1,13 @@
+[workspace]
+authors = ["Nicolas Vannieuwkerke <nicolas.vannieuwkerke@ugent.be>"]
+channels = ["bioconda", "conda-forge"]
+name = "nft-bam"
+platforms = ["linux-64", "osx-64", "osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+maven = ">=3.9.16,<4"
+nf-test = ">=0.9.5,<0.10"
+nextflow = ">=26.4.6,<27"
