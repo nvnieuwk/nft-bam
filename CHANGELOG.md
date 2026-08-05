@@ -4,7 +4,7 @@
 
 1. Bumped htsjkd to 5.0.0. This can change the output of the `.getSamLines()` and `.getReadsMD5()` methods since all fields are now emitted and new-line characters are now removed from the raw lines (See the corresponding [PR](https://github.com/samtools/htsjdk/pull/1762) for more details).
 2. Added a pixi environment to ease development
-3. Pick the `.gzi` reference index whenever the fasta reference is compressed (`.gz`)
+3. Also create a `.gzi` index for compressed FASTA files whenever it's missing. This enables the usage of compressed FASTA files.
 
 ## v0.6.1
 
